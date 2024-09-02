@@ -1046,9 +1046,16 @@ input_str = "!olbiV ot emocleW"
 print(reverse_string(stack, input_str)) # Output: Welcome to Viblo!
 ```
 
-- Hàm `reverse_string` nhận vào một đối tượng `stack` và một chuỗi `input_str`. Nó lần lượt đẩy từng ký tự của `input_str` vào `stack`.
-- Sau khi tất cả các ký tự đã được đẩy vào `stack`, hàm sẽ lần lượt lấy các ký tự từ `stack` và xây dựng chuỗi đảo ngược `rev_str`.
-- Cuối cùng, hàm trả về chuỗi `rev_str`, chính là chuỗi đảo ngược của `input_str`.
+- Vòng lặp for này lặp qua từng ký tự trong chuỗi `input_str` bằng cách sử dụng index `i`.
+- Mỗi ký tự từ `input_str[i]` được đưa vào stack thông qua phương thức `stack.push(input_str[i])`.
+- Kết quả là tất cả các ký tự của `input_str` được đẩy vào stack theo thứ tự từ đầu đến cuối.
+- Biến `rev_str` được khởi tạo là một chuỗi trống `("")`.
+- Biến này sẽ được sử dụng để xây dựng chuỗi đã được đảo ngược.
+- Vòng lặp while này tiếp tục chạy miễn là stack không rỗng (`not stack.is_empty()`).
+- Trong mỗi lần lặp, phần tử trên cùng của stack được lấy ra bằng phương thức `stack.pop()` và được nối thêm vào chuỗi `rev_str`.
+- Vì stack là cấu trúc dữ liệu LIFO (Last-In, First-Out), các ký tự được đưa vào sau cùng sẽ được lấy ra trước, do đó `rev_str` sẽ chứa các ký tự theo thứ tự ngược lại so với chuỗi ban đầu.
+- Sau khi vòng lặp while kết thúc (nghĩa là stack đã rỗng), chuỗi `rev_str` sẽ chứa phiên bản đảo ngược của `input_str`.
+- Hàm `reverse_string` trả về chuỗi `rev_str` này.
 
 ### Convert Decimal Integer to Binary
 
