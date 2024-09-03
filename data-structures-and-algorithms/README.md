@@ -1,72 +1,72 @@
 - [Data Structures và Algorithms trong Python](#data-structures-và-algorithms-trong-python)
-  - [Built-in Data Structures](#built-in-data-structures)
-    - [List](#list)
-      - [Tạo một list](#tạo-một-list)
-        - [Bạn có thể tạo một list đơn giản như sau:](#bạn-có-thể-tạo-một-list-đơn-giản-như-sau)
-        - [Sử dụng hàm `range()` để tạo một list:](#sử-dụng-hàm-range-để-tạo-một-list)
-      - [Truy cập các phần tử trong List:](#truy-cập-các-phần-tử-trong-list)
-      - [Thêm, xóa và thay đổi phần tử trong List:](#thêm-xóa-và-thay-đổi-phần-tử-trong-list)
-        - [Thêm phần tử](#thêm-phần-tử)
-        - [Xóa phần tử](#xóa-phần-tử)
-        - [Thay đổi phần tử](#thay-đổi-phần-tử)
-        - [Một số phương thức hữu ích khác cho List:](#một-số-phương-thức-hữu-ích-khác-cho-list)
-      - [List sclicing](#list-sclicing)
-      - [List Comprehension](#list-comprehension)
-      - [Tạo một list mới từ một list hiện có](#tạo-một-list-mới-từ-một-list-hiện-có)
-      - [Sử dụng if-else trong List Comprehension](#sử-dụng-if-else-trong-list-comprehension)
-      - [List comprehension dùng với nhiều list](#list-comprehension-dùng-với-nhiều-list)
-    - [Tuple](#tuple)
-      - [Tạo một tuple](#tạo-một-tuple)
-      - [Truy cập các phần tử trong Tuple](#truy-cập-các-phần-tử-trong-tuple)
-      - [Merging tuples](#merging-tuples)
-      - [Nested Tuples](#nested-tuples)
-      - [Một số thao tác với Tuple](#một-số-thao-tác-với-tuple)
-        - [Tìm kiếm](#tìm-kiếm)
-        - [Slicing tuple](#slicing-tuple)
-      - [Vậy tại sao cần tuple khi đã có list?](#vậy-tại-sao-cần-tuple-khi-đã-có-list)
-        - [Ví dụ về sử dụng tuple làm key trong dictionary:](#ví-dụ-về-sử-dụng-tuple-làm-key-trong-dictionary)
-    - [Dictionary](#dictionary)
-      - [Tạo một dictionary](#tạo-một-dictionary)
-        - [Python version 3](#python-version-3)
-        - [Python version 3.9.6](#python-version-396)
-      - [`dict()` Constructor](#dict-constructor)
-        - [Refactor các ví dụ ở trên:](#refactor-các-ví-dụ-ở-trên)
-      - [Truy cập giá trị trong Dictionary](#truy-cập-giá-trị-trong-dictionary)
-        - [Lợi ích của việc sử dụng `get()`:](#lợi-ích-của-việc-sử-dụng-get)
-      - [Dictionary Operations](#dictionary-operations)
-        - [Thêm/Cập nhật](#thêmcập-nhật)
-        - [Xóa](#xóa)
-        - [Độ dài của một Dictionary](#độ-dài-của-một-dictionary)
-        - [Kiểm tra Sự Tồn tại của Key](#kiểm-tra-sự-tồn-tại-của-key)
-        - [Sao chép nội dung](#sao-chép-nội-dung)
-        - [Dictionary Comprehension](#dictionary-comprehension)
-    - [Set](#set)
-      - [Tạo một set](#tạo-một-set)
-      - [Các thao tác cơ bản với Set](#các-thao-tác-cơ-bản-với-set)
-        - [Thêm phần tử vào Set](#thêm-phần-tử-vào-set)
-        - [Xóa phần tử khỏi Set](#xóa-phần-tử-khỏi-set)
-        - [Kiểm tra sự tồn tại của phần tử trong Set](#kiểm-tra-sự-tồn-tại-của-phần-tử-trong-set)
-      - [Các phép toán trên tập hợp](#các-phép-toán-trên-tập-hợp)
-        - [Union](#union)
-        - [Intersection](#intersection)
-        - [Difference](#difference)
-        - [Symmetric Difference](#symmetric-difference)
-      - [Ứng dụng của Set](#ứng-dụng-của-set)
-        - [Loại bỏ các phần tử trùng lặp](#loại-bỏ-các-phần-tử-trùng-lặp)
-        - [Thực hiện các phép toán tập hợp](#thực-hiện-các-phép-toán-tập-hợp)
+- [Built-in Data Structures](#built-in-data-structures)
+  - [List](#list)
+    - [Tạo một list](#tạo-một-list)
+      - [Bạn có thể tạo một list đơn giản như sau:](#bạn-có-thể-tạo-một-list-đơn-giản-như-sau)
+      - [Sử dụng hàm `range()` để tạo một list:](#sử-dụng-hàm-range-để-tạo-một-list)
+    - [Truy cập các phần tử trong List:](#truy-cập-các-phần-tử-trong-list)
+    - [Thêm, xóa và thay đổi phần tử trong List:](#thêm-xóa-và-thay-đổi-phần-tử-trong-list)
+      - [Thêm phần tử](#thêm-phần-tử)
+      - [Xóa phần tử](#xóa-phần-tử)
+      - [Thay đổi phần tử](#thay-đổi-phần-tử)
+      - [Một số phương thức hữu ích khác cho List:](#một-số-phương-thức-hữu-ích-khác-cho-list)
+    - [List sclicing](#list-sclicing)
+    - [List Comprehension](#list-comprehension)
+    - [Tạo một list mới từ một list hiện có](#tạo-một-list-mới-từ-một-list-hiện-có)
+    - [Sử dụng if-else trong List Comprehension](#sử-dụng-if-else-trong-list-comprehension)
+    - [List comprehension dùng với nhiều list](#list-comprehension-dùng-với-nhiều-list)
+  - [Tuple](#tuple)
+    - [Tạo một tuple](#tạo-một-tuple)
+    - [Truy cập các phần tử trong Tuple](#truy-cập-các-phần-tử-trong-tuple)
+    - [Merging tuples](#merging-tuples)
+    - [Nested Tuples](#nested-tuples)
+    - [Một số thao tác với Tuple](#một-số-thao-tác-với-tuple)
+      - [Tìm kiếm](#tìm-kiếm)
+      - [Slicing tuple](#slicing-tuple)
+    - [Vậy tại sao cần tuple khi đã có list?](#vậy-tại-sao-cần-tuple-khi-đã-có-list)
+      - [Ví dụ về sử dụng tuple làm key trong dictionary:](#ví-dụ-về-sử-dụng-tuple-làm-key-trong-dictionary)
+  - [Dictionary](#dictionary)
+    - [Tạo một dictionary](#tạo-một-dictionary)
+      - [Python version 3](#python-version-3)
+      - [Python version 3.9.6](#python-version-396)
+    - [`dict()` Constructor](#dict-constructor)
+      - [Refactor các ví dụ ở trên:](#refactor-các-ví-dụ-ở-trên)
+    - [Truy cập giá trị trong Dictionary](#truy-cập-giá-trị-trong-dictionary)
+      - [Lợi ích của việc sử dụng `get()`:](#lợi-ích-của-việc-sử-dụng-get)
+    - [Dictionary Operations](#dictionary-operations)
+      - [Thêm/Cập nhật](#thêmcập-nhật)
+      - [Xóa](#xóa)
+      - [Độ dài của một Dictionary](#độ-dài-của-một-dictionary)
+      - [Kiểm tra Sự Tồn tại của Key](#kiểm-tra-sự-tồn-tại-của-key)
+      - [Sao chép nội dung](#sao-chép-nội-dung)
+      - [Dictionary Comprehension](#dictionary-comprehension)
+  - [Set](#set)
+    - [Tạo một set](#tạo-một-set)
+    - [Các thao tác cơ bản với Set](#các-thao-tác-cơ-bản-với-set)
+      - [Thêm phần tử vào Set](#thêm-phần-tử-vào-set)
+      - [Xóa phần tử khỏi Set](#xóa-phần-tử-khỏi-set)
+      - [Kiểm tra sự tồn tại của phần tử trong Set](#kiểm-tra-sự-tồn-tại-của-phần-tử-trong-set)
+    - [Các phép toán trên tập hợp](#các-phép-toán-trên-tập-hợp)
+      - [Union](#union)
+      - [Intersection](#intersection)
+      - [Difference](#difference)
+      - [Symmetric Difference](#symmetric-difference)
+    - [Ứng dụng của Set](#ứng-dụng-của-set)
+      - [Loại bỏ các phần tử trùng lặp](#loại-bỏ-các-phần-tử-trùng-lặp)
+      - [Thực hiện các phép toán tập hợp](#thực-hiện-các-phép-toán-tập-hợp)
     - [Tóm tắt](#tóm-tắt)
       - [List](#list-1)
       - [Tuple](#tuple-1)
       - [Dictionary](#dictionary-1)
       - [Set](#set-1)
-  - [Stack](#stack)
-    - [Các thao tác cơ bản trên stack](#các-thao-tác-cơ-bản-trên-stack)
-    - [Determine if Brackets are Balanced](#determine-if-brackets-are-balanced)
-      - [Cách tiếp cận](#cách-tiếp-cận)
-        - [Giải thích hàm `is_paren_balanced(paren_string)`](#giải-thích-hàm-is_paren_balancedparen_string)
-        - [Giải thích hàm `is_match(p1, p2)`](#giải-thích-hàm-is_matchp1-p2)
-    - [Reverse String](#reverse-string)
-    - [Convert Decimal Integer to Binary](#convert-decimal-integer-to-binary)
+- [Stack](#stack)
+  - [Các thao tác cơ bản trên stack](#các-thao-tác-cơ-bản-trên-stack)
+  - [Determine if Brackets are Balanced](#determine-if-brackets-are-balanced)
+    - [Cách tiếp cận](#cách-tiếp-cận)
+      - [Giải thích hàm `is_paren_balanced(paren_string)`](#giải-thích-hàm-is_paren_balancedparen_string)
+      - [Giải thích hàm `is_match(p1, p2)`](#giải-thích-hàm-is_matchp1-p2)
+  - [Reverse String](#reverse-string)
+  - [Convert Decimal Integer to Binary](#convert-decimal-integer-to-binary)
 
 # Data Structures và Algorithms trong Python
 
@@ -94,7 +94,7 @@ Cấu trúc dữ liệu và giải thuật là một trong những khái niệm 
 
 - String Processing
 
-## Built-in Data Structures
+# Built-in Data Structures
 
 Vì chúng ta thường xuyên phải xử lý việc thao tác dữ liệu, nên việc tổ chức dữ liệu một cách hiệu quả và có ý nghĩa là điều vô cùng quan trọng.
 
@@ -107,7 +107,7 @@ Bốn cấu trúc dữ liệu tích hợp chính mà `Python` cung cấp là:
 - Dictionary
 - Set
 
-### List
+## List
 
 List là một trong những cấu trúc dữ liệu phổ biến và linh hoạt nhất trong Python. Nó cho phép chúng ta lưu trữ các phần tử có kiểu dữ liệu khác nhau trong một vùng chứa. Nội dung của một list được đặt bên trong dấu ngoặc vuông `[]`, và các phần tử được phân tách bởi dấu phẩy `,`.
 
@@ -117,16 +117,16 @@ List là một trong những cấu trúc dữ liệu phổ biến và linh hoạ
 - Có thể thay đổi (Mutable): Bạn có thể thay đổi, thêm, hoặc xóa các phần tử trong list sau khi nó đã được tạo ra.
 - Cho phép các giá trị trùng lặp: List có thể chứa các phần tử giống nhau.
 
-#### Tạo một list
+### Tạo một list
 
-##### Bạn có thể tạo một list đơn giản như sau:
+#### Bạn có thể tạo một list đơn giản như sau:
 
 ```python
 # Tạo một list với các kiểu dữ liệu khác nhau
 mixed_list = [1, "Hello", 3.14, True]
 ```
 
-##### Sử dụng hàm `range()` để tạo một list:
+#### Sử dụng hàm `range()` để tạo một list:
 
 Hàm range() trong Python được sử dụng để tạo ra một dãy số theo một quy tắc nhất định, `range(start, stop, step)`.
 
@@ -148,7 +148,7 @@ numbers = list(range(10, 0, -1))
 print(numbers)  # Output: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 ```
 
-#### Truy cập các phần tử trong List:
+### Truy cập các phần tử trong List:
 
 ```python
 fruits = ["apple", "banana", "watermelon", "cherry"]
@@ -163,9 +163,9 @@ print(fruits[1])  # Output: banana
 print(fruits[-1])  # Output: cherry
 ```
 
-#### Thêm, xóa và thay đổi phần tử trong List:
+### Thêm, xóa và thay đổi phần tử trong List:
 
-##### Thêm phần tử
+#### Thêm phần tử
 
 Bạn có thể thêm phần tử vào cuối list bằng phương thức `append()` hoặc thêm phần tử vào vị trí cụ thể bằng `insert()`.
 
@@ -181,7 +181,7 @@ fruits.insert(1, "mango")
 print(fruits)  # Output: ['apple', 'mango', 'banana', 'cherry', 'orange']
 ```
 
-##### Xóa phần tử
+#### Xóa phần tử
 
 Bạn có thể xóa một phần tử bằng `remove()`, `pop()`, hoặc `del`.
 
@@ -200,7 +200,7 @@ del fruits[0]
 print(fruits)  # Output: []
 ```
 
-##### Thay đổi phần tử
+#### Thay đổi phần tử
 
 Bạn có thể thay đổi giá trị của phần tử bằng cách truy cập trực tiếp vào index của nó.
 
@@ -213,7 +213,7 @@ fruits[1] = "blueberry"
 print(fruits)  # Output: ['apple', 'blueberry', 'cherry']
 ```
 
-##### Một số phương thức hữu ích khác cho List:
+#### Một số phương thức hữu ích khác cho List:
 
 - `sort()`: Sắp xếp các phần tử trong list.
 - `reverse()`: Đảo ngược thứ tự các phần tử trong list.
@@ -238,7 +238,7 @@ print(len(numbers))  # Output: 6
 print(numbers.index(4))  # Output: 2
 ```
 
-#### List sclicing
+### List sclicing
 
 ```python
 numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -273,7 +273,7 @@ print(last_three)  # Output: [7, 8, 9]
 
 ```
 
-#### List Comprehension
+### List Comprehension
 
 List Comprehension là một cách ngắn và gọn gàng để tạo ra các list mới từ các list hiện có bằng cách sử dụng cú pháp đơn giản kết hợp giữa vòng lặp `for` và điều kiện `if`
 
@@ -287,7 +287,7 @@ new_list = [expression for item in iterable if condition]
 - item: Từng phần tử trong iterable (list, tuple, string, v.v.).
 - condition (tuỳ chọn): Điều kiện để chọn các phần tử đưa vào list mới.
 
-#### Tạo một list mới từ một list hiện có
+### Tạo một list mới từ một list hiện có
 
 ```python
 numbers = [1, 2, 3, 4, 5]
@@ -296,7 +296,7 @@ squares = [x**2 for x in numbers]
 print(squares)  # Output: [1, 4, 9, 16, 25]
 ```
 
-#### Sử dụng if-else trong List Comprehension
+### Sử dụng if-else trong List Comprehension
 
 ```python
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -310,7 +310,7 @@ results = [x*2 if x % 2 == 0 else x*3 for x in numbers]
 print(results)  # Output: [3, 4, 9, 8, 15]
 ```
 
-#### List comprehension dùng với nhiều list
+### List comprehension dùng với nhiều list
 
 ```python
 list1 = [30, 50, 110, 40, 15, 75]
@@ -323,13 +323,13 @@ print(sum_list) # Output: [(50, 60), (110, 10), (110, 60), (110, 20), (110, 50),
 
 ```
 
-### Tuple
+## Tuple
 
 Tuple thì gần giống như list, ngoại trừ việc tuple là immutable (không thể thay đổi). Điều này có nghĩa là sau khi ta tạo một tuple, ta không thể thay đổi, thêm, hoặc xóa các phần tử bên trong nó. Tuy nhiên, nó có thể chứa các phần tử có thể thay đổi (mutable elements) như một list.
 
 Nội dung của tuple được đặt bên trong dấu ngoặc đơn `()` và các phần tử được phân tách bởi dấu phẩy `,`.
 
-#### Tạo một tuple
+### Tạo một tuple
 
 ```python
 # Tạo một tuple rỗng
@@ -346,7 +346,7 @@ Python cũng cho phép ta tạo tuple mà không cần dấu ngoặc đơn, ch�
 my_tuple = 1, 2, 3, "Hello", True
 ```
 
-#### Truy cập các phần tử trong Tuple
+### Truy cập các phần tử trong Tuple
 
 ```python
 my_tuple = (1, 2, 3, "Hello", True)
@@ -358,7 +358,7 @@ print(my_tuple[0])  # Output: 1
 print(my_tuple[-1])  # Output: True
 ```
 
-#### Merging tuples
+### Merging tuples
 
 Tuples có thể được merged bằng cách sử dụng toán tử `+`.
 
@@ -370,7 +370,7 @@ print(awesome_team) # Output: ('Batman', 'Wonder Woman', 'Wonder Woman', 'Diana 
 
 ```
 
-#### Nested Tuples
+### Nested Tuples
 
 ```python
 nested_tuple = (1, 2, (3, 4), 5)
@@ -389,9 +389,9 @@ print(awesome_team) # Output: (('Batman', 'Bruce Wayne'), ('Wonder Woman', 'Dian
 
 ```
 
-#### Một số thao tác với Tuple
+### Một số thao tác với Tuple
 
-##### Tìm kiếm
+#### Tìm kiếm
 
 Chúng ta có thể kiểm tra xem một phần tử có tồn tại trong một tuple hay không bằng cách sử dụng toán tử `in` như sau:
 
@@ -407,7 +407,7 @@ cities = ("London", "Paris", "Los Angeles", "Tokyo")
 print(cities.index("Tokyo")) # Output: 3
 ```
 
-##### Slicing tuple
+#### Slicing tuple
 
 Tương tự như với list
 
@@ -418,13 +418,13 @@ print(slice_tuple)  # Output: (2, 3, 4)
 
 ```
 
-#### Vậy tại sao cần tuple khi đã có list?
+### Vậy tại sao cần tuple khi đã có list?
 
 - Immutable: Tính không thể thay đổi giúp tuple an toàn hơn khi ta cần lưu trữ các giá trị không muốn bị thay đổi sau khi tạo ra.
 - Hiệu suất: Tuple thường có hiệu suất tốt hơn list trong các tình huống không cần thay đổi dữ liệu.
 - Tuple có thể làm key cho dictionary: Do tính immutable, tuple có thể được sử dụng làm key trong dictionary (trong khi list thì không).
 
-##### Ví dụ về sử dụng tuple làm key trong dictionary:
+#### Ví dụ về sử dụng tuple làm key trong dictionary:
 
 ```python
 # Tạo dictionary với khóa là tuple (tọa độ) và giá trị là tên thành phố
@@ -444,7 +444,7 @@ print(f"Thành phố tại tọa độ {location} là {city_name}")
 
 [Tham khảo thêm](https://stackoverflow.com/questions/1938614/in-what-case-would-i-use-a-tuple-as-a-dictionary-key)
 
-### Dictionary
+## Dictionary
 
 So với list hoặc tuple, dictionary có cấu trúc phức tạp hơn một chút.
 
@@ -454,14 +454,14 @@ Trong Python, nội dung của dictionary được đặt bên trong dấu ngo�
 
 Trong các phiên bản Python trước 3.6, dictionary là unordered. Kể từ Python 3.7, các dictionary trở nên ordered theo mặc định. Ta sẽ xem ví dụ ngay dưới đây
 
-#### Tạo một dictionary
+### Tạo một dictionary
 
 ```python
 empty_dict = {}  # Dictionary rỗng
 print(empty_dict) # {}
 ```
 
-##### Python version 3
+#### Python version 3
 
 ```python
 films = {"The Gentlemen": 2019,
@@ -471,7 +471,7 @@ print(films) # {'The Terminal List': 2022, "Guy Ritchie's The Covenant": 2023, '
 
 ```
 
-##### Python version 3.9.6
+#### Python version 3.9.6
 
 ```python
 films = {"The Gentlemen": 2019,
@@ -480,7 +480,7 @@ films = {"The Gentlemen": 2019,
 print(films) # {'The Gentlemen': 2019, 'The Terminal List': 2022, "Guy Ritchie's The Covenant": 2023}
 ```
 
-#### `dict()` Constructor
+### `dict()` Constructor
 
 Như tên gọi, `dict()` constructor có thể được sử dụng để tạo ra một dictionary.
 
@@ -488,7 +488,7 @@ Nếu các khóa (keys) của chúng ta là các chuỗi đơn giản không có
 
 Việc sử dụng `dict()` có thể làm cho code của ta ngắn gọn và dễ đọc hơn trong một số trường hợp nhất định.
 
-##### Refactor các ví dụ ở trên:
+#### Refactor các ví dụ ở trên:
 
 Thay vì viết:
 
@@ -518,7 +518,7 @@ Ta có thể viết lại thành:
 phone_book = dict(John=123456789, Alice=987654321, Bob=456789123)
 ```
 
-#### Truy cập giá trị trong Dictionary
+### Truy cập giá trị trong Dictionary
 
 Đối với nhiều người, đây là điểm mà dictionary có ưu thế hơn so với list hoặc tuple. Vì không có các chỉ mục tuyến tính (linear indices), chúng ta không cần phải theo dõi vị trí lưu trữ của các giá trị.
 
@@ -539,7 +539,7 @@ alice_number = phone_book.get('Alice')
 print(alice_number)  # Output: 987654321
 ```
 
-##### Lợi ích của việc sử dụng `get()`:
+#### Lợi ích của việc sử dụng `get()`:
 
 An toàn hơn khi key không tồn tại: Khi sử dụng dấu ngoặc vuông `[]` để truy cập một giá trị mà key không tồn tại trong dictionary, Python sẽ phát sinh lỗi `KeyError`. Tuy nhiên, với phương thức `get()`, nếu key không tồn tại, thay vì phát sinh lỗi, Python sẽ trả về `None` hoặc một giá trị mặc định mà ta có thể xác định.
 
@@ -561,9 +561,9 @@ non_existent_with_default = phone_book.get('Michael', 'Không tìm thấy')
 print(non_existent_with_default)  # Output: Không tìm thấy
 ```
 
-#### Dictionary Operations
+### Dictionary Operations
 
-##### Thêm/Cập nhật
+#### Thêm/Cập nhật
 
 ```python
 # Tạo một dictionary
@@ -578,7 +578,7 @@ phone_book['Alice'] = 111111111
 print(phone_book)  # Output: {'John': 123456789, 'Alice': 111111111, 'Bob': 456789123}
 ```
 
-##### Xóa
+#### Xóa
 
 - Dùng `del`: Xóa một mục bằng cách chỉ định key.
 - Dùng `pop()`: Xóa một mục và trả về giá trị của mục đó.
@@ -606,7 +606,7 @@ print(phone_book)  # Output: {}
 
 ```
 
-##### Độ dài của một Dictionary
+#### Độ dài của một Dictionary
 
 ```python
 phone_book = {'John': 123456789, 'Alice': 111111111, 'Bob': 456789123}
@@ -614,7 +614,7 @@ length = len(phone_book)
 print(length)  # Output: 3
 ```
 
-##### Kiểm tra Sự Tồn tại của Key
+#### Kiểm tra Sự Tồn tại của Key
 
 Ta có thể kiểm tra xem một key có tồn tại trong dictionary hay không bằng cách sử dụng từ khóa `in`:
 
@@ -627,7 +627,7 @@ else:
 # Output: Alice có trong danh bạ
 ```
 
-##### Sao chép nội dung
+#### Sao chép nội dung
 
 ```python
 # Sao chép bằng copy()
@@ -640,7 +640,7 @@ print(phone_book_copy_2) # Output: {'John': 123456789, 'Alice': 111111111, 'Bob'
 
 ```
 
-##### Dictionary Comprehension
+#### Dictionary Comprehension
 
 Dictionary Comprehension là một cách ngắn gọn và mạnh mẽ để tạo dictionary mới từ một iterable (như list, tuple, hay một dictionary khác). Cú pháp của nó tương tự như List Comprehension nhưng kết quả là một dictionary.
 
@@ -655,13 +655,13 @@ filtered_phone_book = {k: v for k, v in phone_book.items() if v != 111111111}
 print(filtered_phone_book)  # Output: {'John': 123456789, 'Bob': 456789123}
 ```
 
-### Set
+## Set
 
 Set trong Python là một cấu trúc dữ liệu được sử dụng để lưu trữ một tập hợp các phần tử mà mỗi phần tử là duy nhất và không có thứ tự (unordered).
 
 Ta có thể tạo một set bằng cách đặt các phần tử vào trong dấu ngoặc nhọn `{}`, hoặc sử dụng hàm `set()`.
 
-#### Tạo một set
+### Tạo một set
 
 ```python
 # Tạo một set rỗng
@@ -677,9 +677,9 @@ char_set = set("hello")
 print(char_set)  # Output: {'h', 'e', 'l', 'o'}
 ```
 
-#### Các thao tác cơ bản với Set
+### Các thao tác cơ bản với Set
 
-##### Thêm phần tử vào Set
+#### Thêm phần tử vào Set
 
 ```python
 my_set = {1, 2, 3}
@@ -687,7 +687,7 @@ my_set.add(4)
 print(my_set)  # Output: {1, 2, 3, 4}
 ```
 
-##### Xóa phần tử khỏi Set
+#### Xóa phần tử khỏi Set
 
 Ta có thể xóa một phần tử khỏi set bằng cách sử dụng `remove()` hoặc `discard()`:
 
@@ -703,7 +703,7 @@ my_set.discard(5)  # Không phát sinh lỗi mặc dù 5 không có trong set
 print(my_set)  # Output: {1, 3, 4}
 ```
 
-##### Kiểm tra sự tồn tại của phần tử trong Set
+#### Kiểm tra sự tồn tại của phần tử trong Set
 
 Ta có thể sử dụng toán tử `in` để kiểm tra xem một phần tử có tồn tại trong set hay không.
 
@@ -713,9 +713,9 @@ print(2 in my_set)  # Output: True
 print(5 in my_set)  # Output: False
 ```
 
-#### Các phép toán trên tập hợp
+### Các phép toán trên tập hợp
 
-##### Union
+#### Union
 
 Tạo một set mới chứa tất cả các phần tử từ cả hai set.
 
@@ -726,7 +726,7 @@ union_set = set1.union(set2)
 print(union_set)  # Output: {1, 2, 3, 4, 5}
 ```
 
-##### Intersection
+#### Intersection
 
 Tạo một set mới chứa các phần tử có trong cả hai set.
 
@@ -735,7 +735,7 @@ intersection_set = set1.intersection(set2)
 print(intersection_set)  # Output: {3}
 ```
 
-##### Difference
+#### Difference
 
 Tạo một set mới chứa các phần tử có trong set đầu tiên nhưng không có trong set thứ hai.
 
@@ -744,7 +744,7 @@ difference_set = set1.difference(set2)
 print(difference_set)  # Output: {1, 2}
 ```
 
-##### Symmetric Difference
+#### Symmetric Difference
 
 Tạo một set mới chứa các phần tử có trong set này hoặc set kia nhưng không có trong cả hai set.
 
@@ -753,9 +753,9 @@ symmetric_difference_set = set1.symmetric_difference(set2)
 print(symmetric_difference_set)  # Output: {1, 2, 4, 5}
 ```
 
-#### Ứng dụng của Set
+### Ứng dụng của Set
 
-##### Loại bỏ các phần tử trùng lặp
+#### Loại bỏ các phần tử trùng lặp
 
 Set rất hữu ích khi ta cần loại bỏ các phần tử trùng lặp từ một danh sách.
 
@@ -765,7 +765,7 @@ unique_set = set(my_list)
 print(unique_set)  # Output: {1, 2, 3, 4, 5}
 ```
 
-##### Thực hiện các phép toán tập hợp
+#### Thực hiện các phép toán tập hợp
 
 Như đã đề cập, set cho phép ta dễ dàng thực hiện các phép toán tập hợp như hợp, giao, hiệu, hiệu đối xứng.
 
@@ -787,7 +787,7 @@ Như đã đề cập, set cho phép ta dễ dàng thực hiện các phép toá
 
 Đặc điểm: Set là một cấu trúc dữ liệu không có thứ tự (unordered) và không chứa các phần tử trùng lặp. Set có thể thay đổi (mutable).
 
-## Stack
+# Stack
 
 Stack là một cấu trúc dữ liệu tuân theo nguyên tắc LIFO (Last In, First Out), nghĩa là phần tử được thêm vào cuối cùng sẽ được lấy ra đầu tiên.
 
@@ -799,7 +799,7 @@ Ví dụ, nếu anh muốn lấy Book A và nó đang nằm ở dưới đáy c�
 
 Stack trong lập trình hoạt động rất giống với chồng sách mà ta thấy ở trên. Stack là một cấu trúc dữ liệu cho phép ta "đặt" (push) bất kỳ đối tượng, biến hoặc giá trị nào lên trên cùng, giống như cách ta đặt sách lên chồng. Khi ta muốn "lấy" (pop) một giá trị, ta sẽ lấy giá trị ở trên cùng trước, tương tự như lấy cuốn sách trên cùng của chồng sách.
 
-### Các thao tác cơ bản trên stack
+## Các thao tác cơ bản trên stack
 
 - Push: Thêm một phần tử vào đỉnh (top) của stack.
 - Pop: Xóa và trả về phần tử ở đỉnh của stack.
@@ -875,7 +875,7 @@ print("Kích thước của stack:", stack.size()) # Output: Kích thước củ
 
 ```
 
-### Determine if Brackets are Balanced
+## Determine if Brackets are Balanced
 
 Cho một chuỗi chứa các dấu ngoặc `(), {}, []`. Nhiệm vụ của chúng ta là viết một hàm để kiểm tra xem các dấu ngoặc này có được sắp xếp hợp lệ hay không.
 
@@ -891,7 +891,7 @@ Ví dụ về Unbalanced Brackets
 - `{ { { ) } ]`
 - `[ ] [ ] ] ]`
 
-#### Cách tiếp cận
+### Cách tiếp cận
 
 - Sử dụng một stack để lưu trữ các dấu mở ngoặc.
 - Duyệt qua từng ký tự trong chuỗi:
@@ -981,7 +981,7 @@ print(is_paren_balanced("[][]")) # Output: True
 
 ```
 
-##### Giải thích hàm `is_paren_balanced(paren_string)`
+#### Giải thích hàm `is_paren_balanced(paren_string)`
 
 Chúng ta khai báo một `Stack s` (ban đầu là rỗng), và hai biến `is_balanced` và `index` được gán giá trị lần lượt là `True` và `0`.
 
@@ -1009,7 +1009,7 @@ Sau khi vòng lặp `while` kết thúc, chúng ta kiểm tra xem stack có rỗ
 
 Nếu stack không rỗng hoặc biến `is_balanced` là `False`, điều này có nghĩa là chuỗi không cân bằng, và hàm sẽ trả về `False`.
 
-##### Giải thích hàm `is_match(p1, p2)`
+#### Giải thích hàm `is_match(p1, p2)`
 
 Hàm `is_match` được sử dụng để kiểm tra xem hai ký tự, cụ thể là `p1` và `p2`, có phải là một cặp dấu ngoặc hợp lệ hay không. Để `p1` và `p2` khớp nhau:
 
@@ -1018,7 +1018,7 @@ Hàm `is_match` được sử dụng để kiểm tra xem hai ký tự, cụ th�
 
 Nếu `p1` và `p2` khớp nhau theo đúng điều kiện trên, hàm sẽ trả về `True`. Nếu không, hàm sẽ trả về `False`.
 
-### Reverse String
+## Reverse String
 
 Thuật toán để đảo ngược một chuỗi bằng cách sử dụng stack là khá đơn giản và hiệu quả. Thuật toán này hoạt động dựa trên tính chất LIFO (Last-In, First-Out) của stack, nghĩa là phần tử được đưa vào sau cùng sẽ được lấy ra đầu tiên. Khi chúng ta đẩy tất cả các ký tự của chuỗi vào stack, và sau đó lấy chúng ra theo thứ tự ngược lại, chúng ta sẽ thu được một chuỗi đã được đảo ngược.
 
@@ -1057,7 +1057,7 @@ print(reverse_string(stack, input_str)) # Output: Welcome to Viblo!
 - Sau khi vòng lặp while kết thúc (nghĩa là stack đã rỗng), chuỗi `rev_str` sẽ chứa phiên bản đảo ngược của `input_str`.
 - Hàm `reverse_string` trả về chuỗi `rev_str` này.
 
-### Convert Decimal Integer to Binary
+## Convert Decimal Integer to Binary
 
 `main.py`
 
