@@ -80,17 +80,16 @@
     - [Insert After Node](#insert-after-node)
       - [Sử dụng:](#sử-dụng-1)
     - [Insert a node at a specific position in a linked list](#insert-a-node-at-a-specific-position-in-a-linked-list)
-      - [Chèn tại vị trí 0](#chèn-tại-vị-trí-0)
-      - [Chèn tại vị trí bất kỳ khác](#chèn-tại-vị-trí-bất-kỳ-khác)
+      - [Sử dụng](#sử-dụng-2)
   - [Deletion](#deletion)
     - [Xóa bởi giá trị](#xóa-bởi-giá-trị)
       - [Node cần xóa là node đầu tiên](#node-cần-xóa-là-node-đầu-tiên)
       - [Node cần xóa không phải là node đầu tiên](#node-cần-xóa-không-phải-là-node-đầu-tiên)
-      - [Sử dụng](#sử-dụng-2)
+      - [Sử dụng](#sử-dụng-3)
     - [Xóa bởi vị trí](#xóa-bởi-vị-trí)
       - [Xóa node ở vị trí 0](#xóa-node-ở-vị-trí-0)
       - [Xóa node ở các vị trí khác](#xóa-node-ở-các-vị-trí-khác)
-      - [Sử dụng:](#sử-dụng-3)
+      - [Sử dụng:](#sử-dụng-4)
     - [File code singly-linked-list cho tới lúc này](#file-code-singly-linked-list-cho-tới-lúc-này)
   - [Length](#length)
     - [Iterative](#iterative)
@@ -1324,9 +1323,81 @@ sll.insert_after_node("F", "D") # Output: Node với giá trị F không tồn t
 - Chèn tại vị trí 0
 - Chèn tại vị trí bất kỳ khác
 
-#### Chèn tại vị trí 0
+```python
+def insert_at_position(self, position, data):
+    new_node = Node(data)
 
-#### Chèn tại vị trí bất kỳ khác
+    # Trường hợp vị trí là 0 (chèn vào đầu danh sách)
+    if position == 0:
+        new_node.next = self.head
+        self.head = new_node
+        return
+
+    # Trường hợp chèn vào vị trí bất kỳ khác
+    current_node = self.head
+    count = 0
+    prev_node = None
+
+    # Duyệt qua danh sách để tìm vị trí cần chèn
+    while current_node and count < position:
+        prev_node = current_node
+        current_node = current_node.next
+        count += 1
+
+    # Nếu vị trí vượt quá kích thước của danh sách
+    if count != position:
+        print(f"Vị trí {position} vượt quá kích thước của danh sách.")
+        return
+
+    # Chèn node mới vào vị trí đã tìm thấy
+    new_node.next = current_node
+    prev_node.next = new_node
+```
+
+#### Sử dụng
+
+```python
+# Sử dụng danh sách liên kết
+llist = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+llist.append("A")
+llist.append("B")
+llist.append("C")
+
+# Hiển thị danh sách ban đầu
+print("Danh sách ban đầu:")
+llist.display()
+
+# Chèn node tại vị trí 0 (đầu danh sách)
+llist.insert_at_position(0, "D")
+
+# Hiển thị danh sách sau khi chèn tại vị trí 0
+print("\nDanh sách sau khi chèn tại vị trí 0:")
+llist.display()
+
+# Chèn node tại vị trí 2
+llist.insert_at_position(2, "E")
+
+# Hiển thị danh sách sau khi chèn tại vị trí 2
+print("\nDanh sách sau khi chèn tại vị trí 2:")
+llist.display()
+```
+
+Output
+
+```Terminal
+Danh sách ban đầu:
+
+A -> B -> C -> None
+
+Danh sách sau khi chèn tại vị trí 0:
+D -> A -> B -> C -> None
+
+Danh sách sau khi chèn tại vị trí 2:
+D -> A -> E -> B -> C -> None
+
+```
 
 ## Deletion
 
