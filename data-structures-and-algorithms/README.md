@@ -1286,8 +1286,411 @@ sll.display() # Output: A -> B -> D -> C -> None
 sll.insert_after_node("F", "D") # Output: Node với giá trị F không tồn tại trong danh sách liên kết.
 ```
 
+### Insert a node at a specific position in a linked list
+
+Để chèn một phần tử vào vị trí cụ thể trong singly linked list, ta cần xử lý hai trường hợp chính:
+
+- Chèn tại vị trí 0
+- Chèn tại vị trí bất kỳ khác
+
+#### Chèn tại vị trí 0
+
+#### Chèn tại vị trí bất kỳ khác
+
+## Deletion
+
+### Xóa bởi giá trị
+
+Chúng ta có 2 trường hợp:
+
+- Node cần xóa là node đầu tiên (head).
+- Node cần xóa không phải là node đầu tiên (head).
+
+#### Node cần xóa là node đầu tiên
+
+Nếu node cần xóa là head, ta chỉ cần cập nhật con trỏ head để trỏ đến node tiếp theo của head. Điều này sẽ xóa đi liên kết của head hiện tại, và danh sách liên kết vẫn sẽ được duy trì.
+
+```python
+def delete_node(self, key):
+    # Trường hợp node cần xóa là head
+    if self.head and self.head.data == key:
+        self.head = self.head.next
+        return
+```
+
+#### Node cần xóa không phải là node đầu tiên
+
+Nếu node cần xóa không phải là head, ta sẽ duyệt qua danh sách để tìm node trước node cần xóa. Sau khi tìm thấy, ta sẽ cập nhật con trỏ `next` của node trước này để trỏ đến node tiếp theo của node cần xóa, và điều này sẽ xóa bỏ node cần xóa ra khỏi danh sách.
+
+```python
+def delete_node(self, key):
+    current_node = self.head
+
+    # Trường hợp node cần xóa là head
+    if current_node and current_node.data == key:
+        self.head = current_node.next
+        current_node = None
+        return
+
+    # Trường hợp node cần xóa không phải là head
+    prev_node = None
+    while current_node and current_node.data != key:
+        prev_node = current_node
+        current_node = current_node.next
+
+    # Nếu node cần xóa không tồn tại trong danh sách
+    if current_node is None:
+        print(f"Node với giá trị {key} không tồn tại trong danh sách liên kết.")
+        return
+
+    # Cập nhật con trỏ của node trước trỏ đến node tiếp theo của node bị xóa
+    prev_node.next = current_node.next
+    current_node = None
+```
+
+#### Sử dụng
+
+```python
+    # Sử dụng danh sách liên kết
+
+llist = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+
+llist.append("A")
+llist.append("B")
+llist.append("C")
+llist.append("D")
+
+# Hiển thị danh sách ban đầu
+
+print("Danh sách ban đầu:")
+llist.display()
+
+# Xóa node "B" (không phải head)
+
+llist.delete_node("B")
+
+# Hiển thị danh sách sau khi xóa
+
+print("\nDanh sách sau khi xóa B:")
+llist.display()
+
+# Xóa node "A" (là head)
+
+llist.delete_node("A")
+
+# Hiển thị danh sách sau khi xóa
+
+print("\nDanh sách sau khi xóa A (head):")
+llist.display()
+
+```
+
+Output
+
+```Terminal
+Danh sách ban đầu:
+A -> B -> C -> D -> None
+
+Danh sách sau khi xóa B:
+A -> C -> D -> None
+
+Danh sách sau khi xóa A (head):
+C -> D -> None
+```
+
+### Xóa bởi vị trí
+
+Để xóa một node theo vị trí cụ thể trong singly linked list (danh sách liên kết đơn), ta sẽ xử lý hai trường hợp:
+
+- Node cần xóa ở vị trí 0 (node đầu tiên - head): Đây là trường hợp đặc biệt khi node cần xóa là head, ta chỉ cần cập nhật con trỏ head để trỏ đến node tiếp theo.
+
+- Node cần xóa không ở vị trí 0: Trong trường hợp này, ta cần duyệt qua danh sách đến vị trí cần xóa, tìm node trước vị trí đó và cập nhật con trỏ của node trước để bỏ qua node cần xóa.
+
+#### Xóa node ở vị trí 0
+
+```python
+def delete_at_position(self, position):
+    if self.head is None:
+        print("Danh sách trống.")
+        return
+
+    current_node = self.head
+
+    # Trường hợp node cần xóa ở vị trí 0 (node đầu tiên)
+    if position == 0:
+        self.head = current_node.next  # Cập nhật head để trỏ đến node tiếp theo
+        current_node = None
+        return
+```
+
+#### Xóa node ở các vị trí khác
+
+```python
+def delete_at_position(self, position):
+    if self.head is None:
+        print("Danh sách trống.")
+        return
+
+    current_node = self.head
+
+    # Trường hợp node cần xóa ở vị trí 0 (node đầu tiên)
+    if position == 0:
+        self.head = current_node.next  # Cập nhật head để trỏ đến node tiếp theo
+        current_node = None
+        return
+
+    # Trường hợp node cần xóa không phải ở vị trí 0
+    prev_node = None
+    count = 0
+
+    # Duyệt qua danh sách đến vị trí cần xóa
+    while current_node and count != position:
+        prev_node = current_node
+        current_node = current_node.next
+        count += 1
+
+    # Nếu vị trí không tồn tại trong danh sách
+    if current_node is None:
+        print(f"Vị trí {position} vượt quá kích thước của danh sách.")
+        return
+
+    # Cập nhật con trỏ của node trước trỏ đến node tiếp theo của node bị xóa
+    prev_node.next = current_node.next
+    current_node = None
+```
+
+#### Sử dụng:
+
+```python
+
+# Sử dụng danh sách liên kết
+llist = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+
+llist.append("A")
+llist.append("B")
+llist.append("C")
+llist.append("D")
+llist.append("E")
+
+# Hiển thị danh sách ban đầu
+
+print("Danh sách ban đầu:")
+llist.display()
+
+# Xóa node tại vị trí 0 (head)
+
+llist.delete_at_position(0)
+
+# Hiển thị danh sách sau khi xóa node tại vị trí 0
+
+print("\nDanh sách sau khi xóa vị trí 0 (head):")
+llist.display()
+
+# Xóa node tại vị trí 2
+
+llist.delete_at_position(2)
+
+# Hiển thị danh sách sau khi xóa node tại vị trí 2
+
+print("\nDanh sách sau khi xóa vị trí 2:")
+llist.display()
+
+```
+
+Output
+
+```Terminal
+Danh sách ban đầu:
+
+A -> B -> C -> D -> E -> None
+
+Danh sách sau khi xóa vị trí 0 (head):
+B -> C -> D -> E -> None
+
+Danh sách sau khi xóa vị trí 2:
+B -> C -> E -> None
+
+```
+
+### File code tổng cho tới lúc này
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data  # Lưu trữ dữ liệu
+        self.next = None  # Con trỏ trỏ đến node tiếp theo (ban đầu là None)
+
+class SinglyLinkedList:
+    def __init__(self):
+        # Khởi tạo danh sách với head là None (danh sách trống)
+        self.head = None
+
+    # Phương thức append: Chèn một phần tử mới vào cuối danh sách
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:  # Nếu danh sách rỗng, head sẽ là node mới
+            self.head = new_node
+            return
+        last_node = self.head
+        while last_node.next:  # Tìm node cuối cùng
+            last_node = last_node.next
+        last_node.next = new_node  # Gắn node mới vào cuối danh sách
+
+    def prepend(self, data):
+        new_node = Node(data)  # Tạo node mới
+        new_node.next = self.head  # Con trỏ của node mới trỏ đến node đầu hiện tại
+        self.head = new_node  # Cập nhật head để trỏ đến node mới
+
+    def insert_after_node(self, prev_node_data, data):
+        current_node = self.head
+        while current_node:  # Duyệt qua danh sách
+            if current_node.data == prev_node_data:  # Tìm node đích
+                new_node = Node(data)  # Tạo node mới
+                # Con trỏ của node mới trỏ đến node tiếp theo của node đích
+                new_node.next = current_node.next
+                current_node.next = new_node  # Cập nhật con trỏ của node đích trỏ đến node mới
+                return
+            current_node = current_node.next
+        print(
+            f"Node với giá trị {prev_node_data} không tồn tại trong danh sách liên kết.")
+
+    # Phương thức delete_node: Xóa node có dữ liệu cụ thể
+    def delete_node(self, key):
+        current_node = self.head
+
+    # Trường hợp node cần xóa là head
+        if current_node and current_node.data == key:
+            self.head = current_node.next
+            current_node = None
+            return
+
+    # Trường hợp node cần xóa không phải là head
+        prev_node = None
+        while current_node and current_node.data != key:
+            prev_node = current_node
+            current_node = current_node.next
+
+    # Nếu node cần xóa không tồn tại trong danh sách
+        if current_node is None:
+            print(
+                f"Node với giá trị {key} không tồn tại trong danh sách liên kết.")
+            return
+
+    # Cập nhật con trỏ của node trước trỏ đến node tiếp theo của node bị xóa
+        prev_node.next = current_node.next
+        current_node = None
+
+    def delete_at_position(self, position):
+        if self.head is None:
+            print("Danh sách trống.")
+            return
+
+        current_node = self.head
+
+        # Trường hợp node cần xóa ở vị trí 0 (node đầu tiên)
+        if position == 0:
+            self.head = current_node.next  # Cập nhật head để trỏ đến node tiếp theo
+            current_node = None
+            return
+
+        # Trường hợp node cần xóa không phải ở vị trí 0
+        prev_node = None
+        count = 0
+
+        # Duyệt qua danh sách đến vị trí cần xóa
+        while current_node and count != position:
+            prev_node = current_node
+            current_node = current_node.next
+            count += 1
+
+        # Nếu vị trí không tồn tại trong danh sách
+        if current_node is None:
+            print(f"Vị trí {position} vượt quá kích thước của danh sách.")
+            return
+
+        # Cập nhật con trỏ của node trước trỏ đến node tiếp theo của node bị xóa
+        prev_node.next = current_node.next
+        current_node = None
+
+        # Phương thức display: In ra các phần tử trong danh sách
+    def display(self):
+        current_node = self.head
+        while current_node:  # Duyệt qua danh sách cho đến khi gặp None
+            print(current_node.data, end=" -> ")
+            current_node = current_node.next
+        print("None")
+
+# Sử dụng danh sách liên kết
+llist = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+llist.append("B")
+llist.append("C")
+llist.append("E")
+# Sử dụng prepend để thêm A vào đầu danh sách
+llist.prepend("A")
+# Chèn phần tử "D" sau node có giá trị "C"
+llist.insert_after_node("C", "D")
+
+# Hiển thị danh sách ban đầu
+print("------------------------------\nDanh sách ban đầu:")
+llist.display()
+
+# Xóa node tại vị trí 0 (head)
+llist.delete_at_position(0)
+
+# Hiển thị danh sách sau khi xóa node tại vị trí 0
+print("\nDanh sách sau khi xóa vị trí 0 (head):")
+llist.display()
+
+# Xóa node tại vị trí 2
+llist.delete_at_position(2)
+
+# Hiển thị danh sách sau khi xóa node tại vị trí 2
+print("\nDanh sách sau khi xóa vị trí 2:")
+llist.display()
+
+# Xóa node "C" (không phải head)
+llist.delete_node("C")
+
+# Hiển thị danh sách sau khi xóa
+print("\nDanh sách sau khi xóa C:")
+llist.display()
+
+# Xóa node "B" (là head)
+llist.delete_node("B")
+
+# Hiển thị danh sách sau khi xóa
+print("\nDanh sách sau khi xóa B (head):")
+llist.display()
+```
+
 <!-- ## Circular Linked Lists
 
 ## Doubly Linked List
 
 ## Arrays -->
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
