@@ -67,6 +67,7 @@
       - [Giải thích hàm `is_match(p1, p2)`](#giải-thích-hàm-is_matchp1-p2)
   - [Reverse String](#reverse-string)
   - [Convert Decimal Integer to Binary](#convert-decimal-integer-to-binary)
+- [Singly Linked List](#singly-linked-list)
 
 # Data Structures và Algorithms trong Python
 
@@ -1118,11 +1119,174 @@ Nếu `dec_num = 10`, thì:
 
 Stack sẽ chứa `[0, 1, 0, 1]`. Sau khi `pop` từ stack và nối lại, chuỗi kết quả sẽ là "`1010`", tức là dạng nhị phân của `10`.
 
-<!-- ## Linked Lists
+# Singly Linked List
 
-## Singly Linked List
+## Giới thiệu
 
-## Circular Linked Lists
+![](images/singly-linked-list.png)
+
+Mỗi Singly Linked List bao gồm nhiều **nodes**, và mỗi node chứa hai thành phần chính:
+
+1. **Data**
+   Component data cho phép mỗi node trong singly linked list lưu trữ một phần tử dữ liệu. Phần tử này có thể là string, character, number, hoặc bất kỳ kiểu dữ liệu nào khác.
+   Trong ví dụ minh họa mà ta xem ở trên, các phần tử dữ liệu là A, B, và C, đều là các ký tự (character).
+2. **Next** (con trỏ)
+   Component thứ hai, là một con trỏ (pointer) trỏ từ node hiện tại đến node tiếp theo trong danh sách liên kết.
+   Thành phần `next` này giúp kết nối các node lại với nhau, tạo thành chuỗi liên kết.
+
+**Head** là điểm bắt đầu của linked list. Head không phải là một node mà là một con trỏ trỏ đến node đầu tiên trong danh sách. Khi cần duyệt qua linked list hoặc truy cập một phần tử, chúng ta sẽ bắt đầu từ `head` và di chuyển theo hướng của các node tiếp theo bằng cách sử dụng con trỏ `next`.
+
+Component cuối cùng của singly linked list là null. Trong Pythonlà `None`, biểu thị rằng đây là node cuối cùng và không có node nào tiếp theo nữa.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data  # Dữ liệu mà node lưu trữ
+        self.next = None  # Con trỏ trỏ đến node tiếp theo (ban đầu là None)
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None  # Khởi tạo danh sách với head là None (danh sách trống)
+```
+
+### display()
+
+Chúng ta sẽ bắt đầu từ con trỏ `head` và in ra dữ liệu của từng node, sau đó di chuyển đến node tiếp theo. Ta sẽ tiếp tục kiểm tra node tiếp theo để đảm bảo rằng nó không phải là `None`. Nếu không phải, ta sẽ tiếp tục di chuyển đến node kế tiếp. Quy trình này sẽ lặp lại cho đến khi chạm tới node cuối cùng, nơi con trỏ `next` là `None`.
+
+```python
+def display(self):
+    current_node = self.head
+    while current_node:  # Duyệt qua danh sách cho đến khi gặp None
+        print(current_node.data, end=" -> ")
+        current_node = current_node.next
+    print("None")
+```
+
+## Insertion
+
+### Append
+
+Phương thức append sẽ chèn một phần tử vào cuối linked list.
+
+#### Trường hợp Linked List rỗng
+
+Khi triển khai phương thức `append` cho linked list, chúng ta cần xử lý trường hợp đặc biệt nếu linked list rỗng. Trong trường hợp list rỗng (tức là `head` bằng `None`), node mới sẽ trở thành `head` của danh sách. Dưới đây là cách triển khai phương thức `append` bao gồm xử lý cho trường hợp list rỗng:
+
+```python
+
+# Phương thức append: Chèn một phần tử mới vào cuối danh sách
+def append(self, data):
+    new_node = Node(data)
+    # Nếu danh sách rỗng, node mới sẽ là head
+    if not self.head:
+        self.head = new_node
+        return
+```
+
+#### Trường hợp Linked List không rỗng
+
+Trong trường hợp linked list không rỗng, chúng ta cần duyệt qua linked list để tìm node cuối cùng và thêm node mới vào cuối danh sách.
+
+```python
+
+# Phương thức append: Chèn một phần tử mới vào cuối danh sách
+def append(self, data):
+    new_node = Node(data)
+    # Nếu danh sách rỗng, node mới sẽ là head
+    if not self.head:
+        self.head = new_node
+        return
+    # Nếu danh sách không rỗng, tìm node cuối và gắn node mới vào cuối
+    last_node = self.head
+    while last_node.next:
+        last_node = last_node.next
+    last_node.next = new_node
+```
+
+#### Sử dụng append
+
+```python
+# Sử dụng danh sách liên kết
+sll = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+sll.append(1)
+sll.append(2)
+sll.append(3)
+
+# Hiển thị danh sách
+sll.display() # Output: 1 -> 2 -> 3 -> None
+```
+
+### Prepend
+
+Phương thức `prepend` sẽ chèn một phần tử vào đầu linked list. Khi thêm một node mới vào đầu danh sách, chúng ta chỉ cần thay đổi con trỏ head để trỏ đến node mới, và con trỏ của node mới sẽ trỏ đến
+node cũ mà head trỏ đến trước đó.
+
+```python
+def prepend(self, data):
+    new_node = Node(data)  # Tạo node mới
+    new_node.next = self.head  # Con trỏ của node mới trỏ đến node đầu hiện tại
+    self.head = new_node  # Cập nhật head để trỏ đến node mới
+```
+
+#### Sử dụng
+
+```python
+# Sử dụng danh sách liên kết
+sll = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+sll.prepend("C")  # Danh sách: C
+sll.prepend("B")  # Danh sách: B -> C
+sll.prepend("A")  # Danh sách: A -> B -> C
+
+# Thêm phần tử D vào đầu danh sách
+sll.prepend("D")  # Danh sách: D -> A -> B -> C
+
+# Hiển thị danh sách
+sll.display() # Output: D -> A -> B -> C -> None
+```
+
+### Insert After Node
+
+Phương thức `insert_after_node` sẽ chèn một node mới sau một node cụ thể đã có trong linked list. Để triển khai phương thức này, ta cần tìm node đích và sau đó thêm node mới ngay sau nó. Điều này yêu cầu cập nhật các con trỏ để đảm bảo rằng danh sách liên kết vẫn duy trì cấu trúc chính xác.
+
+```python
+def insert_after_node(self, prev_node_data, data):
+    current_node = self.head
+    while current_node:  # Duyệt qua danh sách
+        if current_node.data == prev_node_data:  # Tìm node đích
+            new_node = Node(data)  # Tạo node mới
+            new_node.next = current_node.next  # Con trỏ của node mới trỏ đến node tiếp theo của node đích
+            current_node.next = new_node  # Cập nhật con trỏ của node đích trỏ đến node mới
+            return
+        current_node = current_node.next
+    print(f"Node với giá trị {prev_node_data} không tồn tại trong danh sách liên kết.")
+```
+
+#### Sử dụng:
+
+```python
+# Sử dụng danh sách liên kết
+sll = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+sll.append("A")
+sll.append("B")
+sll.append("C")
+
+# Chèn phần tử sau node "B"
+sll.insert_after_node("B", "D")
+
+# Hiển thị danh sách
+sll.display() # Output: A -> B -> D -> C -> None
+
+# Chèn phần tử sau node "F"
+sll.insert_after_node("F", "D") # Output: Node với giá trị F không tồn tại trong danh sách liên kết.
+```
+
+<!-- ## Circular Linked Lists
 
 ## Doubly Linked List
 
