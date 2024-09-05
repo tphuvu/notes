@@ -125,7 +125,70 @@ class SinglyLinkedList:
         prev_node.next = current_node.next
         current_node = None
 
-        # Phương thức display: In ra các phần tử trong danh sách
+    def get_length_iterative(self):
+        count = 0
+        current_node = self.head
+        while current_node:  # Duyệt qua danh sách cho đến khi gặp None
+            count += 1
+            current_node = current_node.next
+        return count
+
+    # Phương thức tính độ dài recursive
+    def get_length_recursive(self, node):
+        # Nếu node là None, tức là danh sách rỗng hoặc đến cuối danh sách
+        if not node:
+            return 0
+        # Tính độ dài đệ quy cho các node tiếp theo
+        return 1 + self.get_length_recursive(node.next)
+
+    # Phương thức hoán đổi hai node
+    def swap_nodes(self, key1, key2):
+        # Nếu hai node giống nhau, không cần hoán đổi
+        if key1 == key2:
+            return
+
+        # Tìm vị trí của key1
+        prev_node1 = None
+        current_node1 = self.head
+        # Vòng lặp while 1: Tìm vị trí của key1
+        while current_node1 and current_node1.data != key1:
+            prev_node1 = current_node1
+            current_node1 = current_node1.next
+
+        # Tìm vị trí của key2
+        prev_node2 = None
+        current_node2 = self.head
+        # Vòng lặp while 2: Tìm vị trí của key2
+        while current_node2 and current_node2.data != key2:
+            prev_node2 = current_node2
+            current_node2 = current_node2.next
+
+        # Nếu không tìm thấy một trong hai node, dừng lại
+        if not current_node1 or not current_node2:
+            print("Một hoặc cả hai node không tồn tại.")
+            return
+
+        # Nếu key1 không phải là head, cập nhật con trỏ của prev_node1
+        if prev_node1:
+            prev_node1.next = current_node2
+        else:  # Nếu key1 là head
+            # Cập nhật head để trỏ đến node mới ("D")
+            self.head = current_node2
+
+        # Nếu key2 không phải là head, cập nhật con trỏ của prev_node2
+        if prev_node2:
+            prev_node2.next = current_node1  # "C" --> "A"
+        else:  # Nếu key2 là head
+            self.head = current_node1
+
+        # Hoán đổi con trỏ next của hai node
+        current_node1.next, current_node2.next = current_node2.next, current_node1.next
+
+        # A sẽ trỏ đến None
+        # D (self.head) trỏ đến B
+        # Còn B vẫn giữ như cũ trỏ đến C, C thì ở trên đã trỏ đến "A"
+
+    # Phương thức display: In ra các phần tử trong danh sách
     def display(self):
         current_node = self.head
         while current_node:  # Duyệt qua danh sách cho đến khi gặp None
@@ -186,4 +249,26 @@ llist.insert_at_position(3, "D")
 # Hiển thị danh sách sau khi chèn A, B, C, D
 
 print("\nDanh sách sau khi chèn A, B, C, D:")
+llist.display()
+
+# Tính độ dài bằng phương pháp lặp
+length_iterative = llist.get_length_iterative()
+print(f"\nĐộ dài (lặp): {length_iterative}")
+
+# Xóa node "E" (không phải head)
+llist.delete_node("E")
+
+# Hiển thị danh sách sau khi xóa
+print("\nDanh sách sau khi xóa E:")
+llist.display()
+
+# Tính độ dài bằng phương pháp đệ quy
+length_recursive = llist.get_length_recursive(llist.head)
+print(f"\nĐộ dài (đệ quy) sau khi xóa E: {length_recursive}")
+
+# Hoán đổi hai node
+llist.swap_nodes("A", "D")
+
+# Hiển thị danh sách sau khi hoán đổi
+print("\nDanh sách sau khi hoán đổi A và D:")
 llist.display()
