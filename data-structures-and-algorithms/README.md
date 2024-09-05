@@ -68,6 +68,37 @@
   - [Reverse String](#reverse-string)
   - [Convert Decimal Integer to Binary](#convert-decimal-integer-to-binary)
 - [Singly Linked List](#singly-linked-list)
+  - [Giới thiệu](#giới-thiệu)
+    - [display()](#display)
+  - [Insertion](#insertion)
+    - [Append](#append)
+      - [Trường hợp Linked List rỗng](#trường-hợp-linked-list-rỗng)
+      - [Trường hợp Linked List không rỗng](#trường-hợp-linked-list-không-rỗng)
+      - [Sử dụng append](#sử-dụng-append)
+    - [Prepend](#prepend)
+      - [Sử dụng](#sử-dụng)
+    - [Insert After Node](#insert-after-node)
+      - [Sử dụng:](#sử-dụng-1)
+    - [Insert a node at a specific position in a linked list](#insert-a-node-at-a-specific-position-in-a-linked-list)
+      - [Chèn tại vị trí 0](#chèn-tại-vị-trí-0)
+      - [Chèn tại vị trí bất kỳ khác](#chèn-tại-vị-trí-bất-kỳ-khác)
+  - [Deletion](#deletion)
+    - [Xóa bởi giá trị](#xóa-bởi-giá-trị)
+      - [Node cần xóa là node đầu tiên](#node-cần-xóa-là-node-đầu-tiên)
+      - [Node cần xóa không phải là node đầu tiên](#node-cần-xóa-không-phải-là-node-đầu-tiên)
+      - [Sử dụng](#sử-dụng-2)
+    - [Xóa bởi vị trí](#xóa-bởi-vị-trí)
+      - [Xóa node ở vị trí 0](#xóa-node-ở-vị-trí-0)
+      - [Xóa node ở các vị trí khác](#xóa-node-ở-các-vị-trí-khác)
+      - [Sử dụng:](#sử-dụng-3)
+    - [File code singly-linked-list cho tới lúc này](#file-code-singly-linked-list-cho-tới-lúc-này)
+  - [Length](#length)
+    - [Iterative](#iterative)
+    - [Recursive](#recursive)
+  - [Node Swap](#node-swap)
+    - [Giải thích](#giải-thích)
+    - [Minh họa](#minh-họa)
+    - [File code singly-linked-list cho tới lúc này](#file-code-singly-linked-list-cho-tới-lúc-này-1)
 
 # Data Structures và Algorithms trong Python
 
@@ -1659,6 +1690,8 @@ Ví dụ `key1` là `"A": head`, `key2` là `"D"` thì
 ### Minh họa
 
 ![](images/sll_swap_2.png)
+
+### [File code singly-linked-list cho tới lúc này](https://github.com/tphuvu/python-notes/blob/sll-2/data-structures-and-algorithms/singly-linked-list.py)
 
 <!-- ## Reverse
 
