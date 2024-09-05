@@ -1516,158 +1516,163 @@ B -> C -> E -> None
 
 ```
 
-### File code tổng cho tới lúc này
+### [File code singly-linked-list cho tới lúc này](https://github.com/tphuvu/python-notes/blob/sll-1/data-structures-and-algorithms/singly-linked-list.py)
+
+## Length
+
+### Iterative
 
 ```python
-class Node:
-    def __init__(self, data):
-        self.data = data  # Lưu trữ dữ liệu
-        self.next = None  # Con trỏ trỏ đến node tiếp theo (ban đầu là None)
+def get_length_iterative(self):
+    count = 0
+    current_node = self.head
+    while current_node:  # Duyệt qua danh sách cho đến khi gặp None
+        count += 1
+        current_node = current_node.next
+    return count
+```
 
-class SinglyLinkedList:
-    def __init__(self):
-        # Khởi tạo danh sách với head là None (danh sách trống)
-        self.head = None
+### Recursive
 
-    # Phương thức append: Chèn một phần tử mới vào cuối danh sách
-    def append(self, data):
-        new_node = Node(data)
-        if not self.head:  # Nếu danh sách rỗng, head sẽ là node mới
-            self.head = new_node
-            return
-        last_node = self.head
-        while last_node.next:  # Tìm node cuối cùng
-            last_node = last_node.next
-        last_node.next = new_node  # Gắn node mới vào cuối danh sách
+```python
+def get_length_recursive(self, node):
+    # Nếu node là None, tức là danh sách rỗng
+    if not node:
+        return 0
+    # Tính độ dài đệ quy cho các node tiếp theo
+    return 1 + self.get_length_recursive(node.next)
+```
 
-    def prepend(self, data):
-        new_node = Node(data)  # Tạo node mới
-        new_node.next = self.head  # Con trỏ của node mới trỏ đến node đầu hiện tại
-        self.head = new_node  # Cập nhật head để trỏ đến node mới
+## Node Swap
 
-    def insert_after_node(self, prev_node_data, data):
-        current_node = self.head
-        while current_node:  # Duyệt qua danh sách
-            if current_node.data == prev_node_data:  # Tìm node đích
-                new_node = Node(data)  # Tạo node mới
-                # Con trỏ của node mới trỏ đến node tiếp theo của node đích
-                new_node.next = current_node.next
-                current_node.next = new_node  # Cập nhật con trỏ của node đích trỏ đến node mới
-                return
-            current_node = current_node.next
-        print(
-            f"Node với giá trị {prev_node_data} không tồn tại trong danh sách liên kết.")
+Trường hợp cần xử lý khi swap 2 nodes:
 
-    # Phương thức delete_node: Xóa node có dữ liệu cụ thể
-    def delete_node(self, key):
-        current_node = self.head
+- Node 1 và Node 2 không phải là head.
+- Một trong hai node là head.
+- Hai node cần hoán đổi là giống nhau (không cần thực hiện gì).
 
-    # Trường hợp node cần xóa là head
-        if current_node and current_node.data == key:
-            self.head = current_node.next
-            current_node = None
+Các bước để thực hiện swap 2 nodes:
+
+- Tìm vị trí của hai node cần hoán đổi.
+- Nếu một trong hai node là head, cập nhật con trỏ head để trỏ đến node kia.
+- Cập nhật các con trỏ của các node trước hai node cần hoán đổi để giữ liên kết giữa các node trong danh sách.
+
+```python
+    def swap_nodes(self, key1, key2):
+        # Nếu hai node giống nhau, không cần hoán đổi
+        if key1 == key2:
             return
 
-    # Trường hợp node cần xóa không phải là head
-        prev_node = None
-        while current_node and current_node.data != key:
-            prev_node = current_node
-            current_node = current_node.next
+        # Tìm vị trí của key1
+        prev_node1 = None
+        current_node1 = self.head
+        while current_node1 and current_node1.data != key1:
+            prev_node1 = current_node1
+            current_node1 = current_node1.next
 
-    # Nếu node cần xóa không tồn tại trong danh sách
-        if current_node is None:
-            print(
-                f"Node với giá trị {key} không tồn tại trong danh sách liên kết.")
+        # Tìm vị trí của key2
+        prev_node2 = None
+        current_node2 = self.head
+        while current_node2 and current_node2.data != key2:
+            prev_node2 = current_node2
+            current_node2 = current_node2.next
+
+        # Nếu không tìm thấy một trong hai node (None), dừng lại
+        if not current_node1 or not current_node2:
+            print("Một hoặc cả hai node không tồn tại.")
             return
+        # Nếu key1 không phải là head, cập nhật con trỏ của prev_node1
+        if prev_node1:
+            prev_node1.next = current_node2
+        else:  # Nếu key1 là head
+            self.head = current_node2
 
-    # Cập nhật con trỏ của node trước trỏ đến node tiếp theo của node bị xóa
-        prev_node.next = current_node.next
-        current_node = None
+        # Nếu key2 không phải là head, cập nhật con trỏ của prev_node2
+        if prev_node2:
+            prev_node2.next = current_node1
+        else:  # Nếu key2 là head
+            self.head = current_node1
+        # Hoán đổi con trỏ next của hai node
+        current_node1.next, current_node2.next = current_node2.next, current_node1.next
+```
 
-    def delete_at_position(self, position):
-        if self.head is None:
-            print("Danh sách trống.")
-            return
+Sử dụng:
 
-        current_node = self.head
-
-        # Trường hợp node cần xóa ở vị trí 0 (node đầu tiên)
-        if position == 0:
-            self.head = current_node.next  # Cập nhật head để trỏ đến node tiếp theo
-            current_node = None
-            return
-
-        # Trường hợp node cần xóa không phải ở vị trí 0
-        prev_node = None
-        count = 0
-
-        # Duyệt qua danh sách đến vị trí cần xóa
-        while current_node and count != position:
-            prev_node = current_node
-            current_node = current_node.next
-            count += 1
-
-        # Nếu vị trí không tồn tại trong danh sách
-        if current_node is None:
-            print(f"Vị trí {position} vượt quá kích thước của danh sách.")
-            return
-
-        # Cập nhật con trỏ của node trước trỏ đến node tiếp theo của node bị xóa
-        prev_node.next = current_node.next
-        current_node = None
-
-        # Phương thức display: In ra các phần tử trong danh sách
-    def display(self):
-        current_node = self.head
-        while current_node:  # Duyệt qua danh sách cho đến khi gặp None
-            print(current_node.data, end=" -> ")
-            current_node = current_node.next
-        print("None")
-
-# Sử dụng danh sách liên kết
+```python
 llist = SinglyLinkedList()
 
-# Thêm các phần tử vào danh sách
+print("------------------------------")
+
+llist.append("A")
 llist.append("B")
 llist.append("C")
-llist.append("E")
-# Sử dụng prepend để thêm A vào đầu danh sách
-llist.prepend("A")
-# Chèn phần tử "D" sau node có giá trị "C"
-llist.insert_after_node("C", "D")
-
+llist.append("D")
 # Hiển thị danh sách ban đầu
-print("------------------------------\nDanh sách ban đầu:")
+print("Danh sách ban đầu:")
 llist.display()
 
-# Xóa node tại vị trí 0 (head)
-llist.delete_at_position(0)
+# Hoán đổi hai node
+llist.swap_nodes("A", "D")
 
-# Hiển thị danh sách sau khi xóa node tại vị trí 0
-print("\nDanh sách sau khi xóa vị trí 0 (head):")
-llist.display()
-
-# Xóa node tại vị trí 2
-llist.delete_at_position(2)
-
-# Hiển thị danh sách sau khi xóa node tại vị trí 2
-print("\nDanh sách sau khi xóa vị trí 2:")
-llist.display()
-
-# Xóa node "C" (không phải head)
-llist.delete_node("C")
-
-# Hiển thị danh sách sau khi xóa
-print("\nDanh sách sau khi xóa C:")
-llist.display()
-
-# Xóa node "B" (là head)
-llist.delete_node("B")
-
-# Hiển thị danh sách sau khi xóa
-print("\nDanh sách sau khi xóa B (head):")
+# Hiển thị danh sách sau khi hoán đổi
+print("\nDanh sách sau khi hoán đổi A và D:")
 llist.display()
 ```
+
+Output
+
+```Terminal
+------------------------------
+Danh sách ban đầu:
+A -> B -> C -> D -> None
+
+Danh sách sau khi hoán đổi A và D:
+D -> B -> C -> A -> None
+```
+
+### Giải thích
+
+![](images/sll_swap_1.png)
+
+1. Tìm hai node cần hoán đổi:
+
+- Ta duyệt qua danh sách liên kết để tìm `prev_node` và `current_node` cho cả hai node cần hoán đổi (`key1` và `key2`).
+
+2. Cập nhật liên kết:
+
+- Nếu một trong hai node là head, ta cập nhật head trỏ đến node kia.
+- Sau đó, ta cập nhật con trỏ của node trước để nó trỏ đến node còn lại.
+
+Ví dụ `key1` là `"A": head`, `key2` là `"D"` thì
+
+- `self.head` sẽ trỏ đến `current_node2` `("D")`
+- `prev_node2.next ("C")` sẽ trỏ đến `current_node1 ("A")`
+
+3. Hoán đổi các con trỏ next:
+
+- Cuối cùng, ta hoán đổi con trỏ next của hai node hiện tại (`current_node1.next` và `current_node2.next`) để hoàn tất việc hoán đổi các node trong danh sách liên kết. Sau `A` (`current_node1.next`) sẽ là `None` (`current_node2.next`) và sau `D` (`current_node2.next`) sẽ là `B` (`current_node1.next`)
+
+4. Trường hợp không tìm thấy node:
+
+- Nếu không tìm thấy một trong hai node, chương trình sẽ thông báo và dừng lại.
+
+### Minh họa
+
+![](images/sll_swap_2.png)
+
+<!-- ## Reverse
+
+## Merge Two Sorted Linked Lists
+
+## Remove Duplicates
+
+## Nth-to-Last Node
+
+## Count Occurrences
+
+## Rotate
+
+## Is Palindrome -->
 
 <!-- ## Circular Linked Lists
 
