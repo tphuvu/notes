@@ -90,14 +90,12 @@
       - [Xóa node ở vị trí 0](#xóa-node-ở-vị-trí-0)
       - [Xóa node ở các vị trí khác](#xóa-node-ở-các-vị-trí-khác)
       - [Sử dụng:](#sử-dụng-4)
-    - [File code singly-linked-list cho tới lúc này](#file-code-singly-linked-list-cho-tới-lúc-này)
   - [Length](#length)
     - [Iterative](#iterative)
     - [Recursive](#recursive)
   - [Node Swap](#node-swap)
     - [Giải thích](#giải-thích)
     - [Minh họa](#minh-họa)
-    - [File code singly-linked-list cho tới lúc này](#file-code-singly-linked-list-cho-tới-lúc-này-1)
 
 # Data Structures và Algorithms trong Python
 
@@ -1320,8 +1318,8 @@ sll.insert_after_node("F", "D") # Output: Node với giá trị F không tồn t
 
 Để chèn một phần tử vào vị trí cụ thể trong singly linked list, ta cần xử lý hai trường hợp chính:
 
-- Chèn tại vị trí 0
-- Chèn tại vị trí bất kỳ khác
+- Chèn tại vị trí 0: ta chỉ cần cập nhật **con trỏ next** của **node mới** để trỏ đến **head hiện tại**, sau đó cập nhật **head** trỏ đến **node mới**.
+- Chèn tại vị trí bất kỳ khác: Nếu `position` lớn hơn 0, ta sẽ duyệt qua danh sách để tìm **node trước** (`prev_node`) vị trí cần chèn. Sau đó, ta chèn **node mới** **_giữa_** **node trước** và **node tại vị trí** đó.
 
 ```python
 def insert_at_position(self, position, data):
@@ -1618,7 +1616,7 @@ B -> C -> E -> None
 
 ```
 
-### [File code singly-linked-list cho tới lúc này](https://github.com/tphuvu/python-notes/blob/sll-1/data-structures-and-algorithms/singly-linked-list.py)
+**[File code singly-linked-list cho tới lúc này](https://github.com/tphuvu/python-notes/blob/sll-1/data-structures-and-algorithms/singly-linked-list.py)**
 
 ## Length
 
@@ -1762,7 +1760,7 @@ Ví dụ `key1` là `"A": head`, `key2` là `"D"` thì
 
 ![](images/sll_swap_2.png)
 
-### [File code singly-linked-list cho tới lúc này](https://github.com/tphuvu/python-notes/blob/sll-2/data-structures-and-algorithms/singly-linked-list.py)
+**[File code singly-linked-list cho tới lúc này](https://github.com/tphuvu/python-notes/blob/sll-2/data-structures-and-algorithms/singly-linked-list.py)**
 
 <!-- ## Reverse
 
