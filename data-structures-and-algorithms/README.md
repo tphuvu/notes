@@ -1156,15 +1156,16 @@ Stack sẽ chứa `[0, 1, 0, 1]`. Sau khi `pop` từ stack và nối lại, chu�
 Mỗi Singly Linked List bao gồm nhiều **nodes**, và mỗi node chứa hai thành phần chính:
 
 1. **Data**
-   Component data cho phép mỗi node trong singly linked list lưu trữ một phần tử dữ liệu. Phần tử này có thể là string, character, number, hoặc bất kỳ kiểu dữ liệu nào khác.
-   Trong ví dụ minh họa mà ta xem ở trên, các phần tử dữ liệu là A, B, và C, đều là các ký tự (character).
+
+- Component data cho phép mỗi node trong singly linked list lưu trữ một phần tử dữ liệu. Phần tử này có thể là string, character, number, hoặc bất kỳ kiểu dữ liệu nào khác.
+
 2. **Next** (con trỏ)
-   Component thứ hai, là một con trỏ (pointer) trỏ từ node hiện tại đến node tiếp theo trong danh sách liên kết.
-   Thành phần `next` này giúp kết nối các node lại với nhau, tạo thành chuỗi liên kết.
+
+- Component thứ hai, là một con trỏ (pointer) trỏ từ node hiện tại đến node tiếp theo trong danh sách liên kết. Component `next` này giúp kết nối các node lại với nhau, tạo thành chuỗi liên kết.
 
 **Head** là điểm bắt đầu của linked list. Head không phải là một node mà là một con trỏ trỏ đến node đầu tiên trong danh sách. Khi cần duyệt qua linked list hoặc truy cập một phần tử, chúng ta sẽ bắt đầu từ `head` và di chuyển theo hướng của các node tiếp theo bằng cách sử dụng con trỏ `next`.
 
-Component cuối cùng của singly linked list là null. Trong Pythonlà `None`, biểu thị rằng đây là node cuối cùng và không có node nào tiếp theo nữa.
+Component cuối cùng của singly linked list là null. Trong Python là `None`, biểu thị rằng đây là node cuối cùng và không có node nào tiếp theo nữa.
 
 ```python
 class Node:
