@@ -96,6 +96,17 @@
   - [Node Swap](#node-swap)
     - [Giải thích](#giải-thích)
     - [Minh họa](#minh-họa)
+  - [Reverse](#reverse)
+    - [Iterative](#iterative-1)
+  - [Merge Two Sorted Linked Lists](#merge-two-sorted-linked-lists)
+    - [Sử dụng](#sử-dụng-5)
+  - [Remove Duplicates](#remove-duplicates)
+    - [Sử dụng](#sử-dụng-6)
+  - [Nth-to-Last Node](#nth-to-last-node)
+  - [Count Occurrences](#count-occurrences)
+  - [Is Palindrome](#is-palindrome)
+    - [Sử dụng List](#sử-dụng-list)
+  - [Tóm tắt](#tóm-tắt-1)
 
 # Data Structures và Algorithms trong Python
 
@@ -1763,42 +1774,279 @@ Ví dụ `key1` là `"A": head`, `key2` là `"D"` thì
 
 **[File code singly-linked-list cho tới lúc này](https://github.com/tphuvu/python-notes/blob/sll-2/data-structures-and-algorithms/singly-linked-list.py)**
 
-<!-- ## Reverse
+## Reverse
+
+### Iterative
+
+![](images/sll_reverse.png)
+
+```python
+def reverse_iterative(self):
+    prev = None
+    current = self.head
+    while current:
+        next_node = current.next  # Lưu trữ node tiếp theo
+        current.next = prev  # Đảo ngược liên kết
+        prev = current  # Di chuyển prev lên
+        current = next_node  # Di chuyển current lên node tiếp theo
+    self.head = prev  # Cập nhật head để trỏ đến node cuối cùng (bây giờ là node đầu tiên)
+```
+
+- `prev` bắt đầu là `None` vì node cuối cùng của danh sách liên kết đảo ngược sẽ trỏ đến `None`.
+- `current` là `head`, ta se duyệt qua từng node trong danh sách liên kết. Tại mỗi bước:
+  - Ta lưu trữ node tiếp theo của `current` trong `next_node`.
+  - Đảo ngược liên kết của node hiện tại (`current.next`) để trỏ về node trước (`prev`).
+  - Cập nhật `prev` thành `current` và `current` thành `next_node` để tiếp tục duyệt danh sách.
+- Cuối cùng, `head` được cập nhật để trỏ đến node cuối cùng, là node đầu tiên trong danh sách đảo ngược.
 
 ## Merge Two Sorted Linked Lists
 
+Ý tưởng cơ bản là so sánh các phần tử từ hai danh sách liên kết và xây dựng một danh sách mới bằng cách liên kết các node theo thứ tự.
+
+```python
+    def merge_sorted_lists(self, other_list):
+
+        head1 = self.head  # con trỏ tới đầu danh sách 1
+        head2 = other_list.head  # con trỏ tới đầu danh sách 2
+        tail = None  # theo dõi phần cuối của merged list
+
+        # Kiểm tra nếu danh sách đầu tiên rỗng
+        if not head1:
+            return head2
+        # Kiểm tra nếu danh sách thứ hai rỗng
+        if not head2:
+            return head1
+
+        # Bắt đầu so sánh giá trị của hai danh sách
+        if head1 and head2:
+            if head1.data <= head2.data:
+                tail = head1
+                head1 = tail.next
+            else:
+                tail = head2
+                head2 = tail.next
+            new_head = tail  # new_head là con trỏ tới đầu merged list
+
+        # Duyệt qua hai danh sách và tiếp tục so sánh các phần tử
+        while head1 and head2:
+            if head1.data <= head2.data:
+                tail.next = head1  # Kết nối node nhỏ hơn từ head1
+                tail = head1
+                head1 = tail.next
+            else:
+                tail.next = head2  # Kết nối node nhỏ hơn từ head2
+                tail = head2
+                head2 = tail.next
+
+        # Nếu head1 hết node, nối phần còn lại của head2
+        if not head1:
+            tail.next = head2
+        # Nếu head2 hết node, nối phần còn lại của head1
+        if not head2:
+            tail.next = head1
+
+        self.head = new_head  # Cập nhật lại head của merged list
+        return self.head
+```
+
+1. Kiểm tra danh sách rỗng:
+
+- Nếu một trong hai danh sách rỗng, trả về danh sách còn lại.
+
+2. Xác định node đầu tiên của merged list
+
+- So sánh giá trị của node đầu tiên từ cả hai danh sách, chọn node có giá trị nhỏ hơn làm new_head (node đầu tiên của merged list).
+
+3. Merge hai danh sách:
+
+- Duyệt qua hai danh sách bằng cách so sánh từng node. Node nào nhỏ hơn sẽ được thêm vào merged list trước.
+
+4. Nối phần còn lại:
+
+- Khi một trong hai danh sách hết node, nối tất cả các node còn lại của danh sách kia vào.
+
+5. Cập nhật `self.head`:
+
+- Cập nhật `self.head` để trỏ đến node đầu tiên của merged list và trả về nếu có cần sử dụng cho mục đích khác.
+
+### Sử dụng
+
+```python
+# Sử dụng danh sách liên kết
+llist1 = SinglyLinkedList()
+llist2 = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách liên kết 1 (đã sắp xếp)
+llist1.append(1)
+llist1.append(3)
+llist1.append(5)
+
+# Thêm các phần tử vào danh sách liên kết 2 (đã sắp xếp)
+llist2.append(2)
+llist2.append(4)
+llist2.append(6)
+
+print("Danh sách liên kết 1:")
+llist1.display()
+
+print("Danh sách liên kết 2:")
+llist2.display()
+
+# Gộp hai danh sách liên kết đã sắp xếp
+llist1.merge_sorted_lists(llist2)
+
+print("\nDanh sách liên kết sau khi gộp:")
+llist1.display()
+```
+
+Output
+
+```Terminal
+Danh sách liên kết 1:
+
+1 -> 3 -> 5 -> None
+Danh sách liên kết 2:
+2 -> 4 -> 6 -> None
+
+Danh sách liên kết sau khi gộp:
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> None
+```
+
 ## Remove Duplicates
+
+- Duyệt qua danh sách liên kết, sử dụng **set** để lưu các giá trị đã gặp.
+- Mỗi khi gặp một giá trị mới, thêm nó vào set.
+- Nếu gặp một giá trị đã tồn tại trong set, ta xóa node đó khỏi danh sách.
+
+```python
+    # Xóa các phần tử trùng lặp trong danh sách
+    def remove_duplicates(self):
+        if not self.head:
+            return
+
+        current = self.head
+        prev = None
+        seen_data = set()  # Tập hợp để lưu các giá trị đã gặp
+
+        while current:
+            if current.data in seen_data:  # Nếu giá trị đã gặp
+                prev.next = current.next  # Bỏ qua node hiện tại (current)
+            else:
+                seen_data.add(current.data)  # Thêm giá trị vào tập hợp
+                prev = current  # Cập nhật con trỏ prev
+            current = current.next  # Di chuyển đến node tiếp theo
+```
+
+1. Duyệt qua danh sách:
+
+- Sử dụng con trỏ `current` để duyệt qua từng node của danh sách.
+- Con trỏ `prev` để theo dõi node trước đó, giúp ta cập nhật liên kết khi xóa một node trùng lặp.
+
+2. Kiểm tra giá trị trùng lặp:
+
+- Sử dụng set (`seen_data`) để lưu trữ các giá trị đã gặp.
+- Mỗi khi gặp một giá trị mới, ta thêm nó vào tập hợp.
+- Nếu giá trị đã tồn tại trong tập hợp, ta xóa node hiện tại bằng cách thay đổi con trỏ `next` của `prev`.
+
+3. Cập nhật liên kết:
+
+- Nếu phát hiện trùng lặp, ta bỏ qua node đó bằng cách thay đổi liên kết giữa `prev` và `current.next`.
+
+### Sử dụng
+
+```python
+# Sử dụng danh sách liên kết
+llist = SinglyLinkedList()
+
+# Thêm các phần tử vào danh sách
+llist.append(1)
+llist.append(2)
+llist.append(2)
+llist.append(3)
+llist.append(4)
+llist.append(4)
+llist.append(5)
+
+print("Danh sách ban đầu:")
+llist.display()
+
+# Xóa các phần tử trùng lặp
+llist.remove_duplicates()
+
+print("Danh sách sau khi xóa các phần tử trùng lặp:")
+llist.display()
+```
+
+Output
+
+```Terminal
+Danh sách ban đầu:
+1 -> 2 -> 2 -> 3 -> 4 -> 4 -> 5 -> None
+Danh sách sau khi xóa các phần tử trùng lặp:
+1 -> 2 -> 3 -> 4 -> 5 -> None
+```
 
 ## Nth-to-Last Node
 
+- Tính độ dài của danh sách
+- Xác định vị trí của node thứ N từ cuối `target_index = length - N`
+- Duyệt qua danh sách từ đầu đến vị trí `target_index`.
+- Trả về node tại vị trí đó nếu tìm thấy, nếu `N` không hợp lệ (lớn hơn độ dài của danh sách hoặc `N <= 0`), trả về `None`.
+
+```python
+    def nth_to_last_node(self, N):
+        length = self.get_length_iterative()  # Tính độ dài của danh sách
+        if N > length or N <= 0:  # Kiểm tra xem N có hợp lệ không
+            return None
+
+        target_index = length - N  # Vị trí tương đương từ đầu danh sách
+        current = self.head
+        count = 0
+
+        while current:
+            if count == target_index:
+                return current  # Trả về node thứ N từ cuối
+            count += 1
+            current = current.next
+        return None
+```
+
 ## Count Occurrences
 
-## Rotate
+Hàm `count_occurrences` sẽ duyệt qua từng node của danh sách, kiểm tra giá trị của từng node và đếm số lần giá trị mà ta muốn kiểm tra xuất hiện trong danh sách.
 
-## Is Palindrome -->
-
-<!-- ## Circular Linked Lists
-
-## Doubly Linked List
-
-## Arrays -->
-
+```python
+# Phương thức đếm số lần xuất hiện của một giá trị
+    def count_occurrences(self, value):
+        count = 0
+        current = self.head
+        while current:
+            if current.data == value:
+                count += 1
+            current = current.next
+        return count
 ```
 
+## Is Palindrome
+
+Để kiểm tra xem một Singly Linked List có phải là palindrome hay không, chúng ta có thể sử dụng nhiều phương pháp khác nhau.
+
+### Sử dụng List
+
+```python
+    def is_palindrome(self):
+        values = []
+        current = self.head
+
+        # Lưu các giá trị của danh sách liên kết vào một list
+        while current:
+            values.append(current.data)
+            current = current.next
+
+        # Kiểm tra xem list có phải là palindrome không
+        return values == values[::-1]
 ```
 
-```
+## Tóm tắt
 
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
+Các phương thức trên giúp thực hiện các thao tác phổ biến và quan trọng với Singly Linked List, từ việc thêm, xóa, đến kiểm tra và merge. Với các phương thức này, ta có thể dễ dàng quản lý và thao tác với linked list một cách hiệu quả.

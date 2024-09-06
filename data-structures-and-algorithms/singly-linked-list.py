@@ -188,6 +188,120 @@ class SinglyLinkedList:
         # D (self.head) trỏ đến B
         # Còn B vẫn giữ như cũ trỏ đến C, C thì ở trên đã trỏ đến "A"
 
+    def reverse_iterative(self):
+        prev = None
+        current = self.head
+        while current:
+            next_node = current.next  # Lưu trữ node tiếp theo
+            current.next = prev  # Đảo ngược liên kết
+            prev = current  # Di chuyển prev lên
+            current = next_node  # Di chuyển current lên node tiếp theo
+        # Cập nhật head để trỏ đến node cuối cùng (bây giờ là node đầu tiên)
+        self.head = prev
+
+    # Phương thức gộp hai danh sách liên kết đã sắp xếp
+
+    def merge_sorted_lists(self, other_list):
+
+        head1 = self.head  # con trỏ tới đầu danh sách 1
+        head2 = other_list.head  # con trỏ tới đầu danh sách 2
+        tail = None  # theo dõi phần cuối của merged list
+
+        # Kiểm tra nếu danh sách đầu tiên rỗng
+        if not head1:
+            return head2
+        # Kiểm tra nếu danh sách thứ hai rỗng
+        if not head2:
+            return head1
+
+        # Bắt đầu so sánh giá trị của hai danh sách
+        if head1 and head2:
+            if head1.data <= head2.data:
+                tail = head1
+                head1 = tail.next
+            else:
+                tail = head2
+                head2 = tail.next
+            new_head = tail  # new_head là con trỏ tới đầu merged list
+
+        # Duyệt qua hai danh sách và tiếp tục so sánh các phần tử
+        while head1 and head2:
+            if head1.data <= head2.data:
+                tail.next = head1  # Kết nối node nhỏ hơn từ head1
+                tail = head1
+                head1 = tail.next
+            else:
+                tail.next = head2  # Kết nối node nhỏ hơn từ head2
+                tail = head2
+                head2 = tail.next
+
+        # Nếu head1 hết node, nối phần còn lại của head2
+        if not head1:
+            tail.next = head2
+        # Nếu head2 hết node, nối phần còn lại của head1
+        if not head2:
+            tail.next = head1
+
+        self.head = new_head  # Cập nhật lại head của merged list
+        return self.head
+
+    # Xóa các phần tử trùng lặp trong danh sách
+    def remove_duplicates(self):
+        if not self.head:
+            return
+
+        current = self.head
+        prev = None
+        seen_data = set()  # Tập hợp để lưu các giá trị đã gặp
+
+        while current:
+            if current.data in seen_data:  # Nếu giá trị đã gặp
+                prev.next = current.next  # Bỏ qua node hiện tại
+            else:
+                seen_data.add(current.data)  # Thêm giá trị vào tập hợp
+                prev = current  # Cập nhật con trỏ prev
+            current = current.next  # Di chuyển đến node tiếp theo
+
+    # Tìm node thứ N từ cuối danh sách
+    def nth_to_last_node(self, N):
+        length = self.get_length_iterative()  # Tính độ dài của danh sách
+        if N > length or N <= 0:  # Kiểm tra xem N có hợp lệ không
+            return None
+
+        target_index = length - N  # Vị trí tương đương từ đầu danh sách
+        current = self.head
+        count = 0
+
+        while current:
+            if count == target_index:
+                return current  # Trả về node thứ N từ cuối
+            count += 1
+            current = current.next
+        return None
+
+    # Phương thức đếm số lần xuất hiện của một giá trị
+    def count_occurrences(self, value):
+        count = 0
+        current = self.head
+        while current:
+            if current.data == value:
+                count += 1
+            current = current.next
+        return count
+
+    # Phương thức kiểm tra danh sách có phải là palindrome hay không sử dụng List
+    def is_palindrome(self):
+        values = []
+        current = self.head
+
+        # Lưu các giá trị của danh sách liên kết vào một list
+        while current:
+            values.append(current.data)
+            current = current.next
+
+        # Kiểm tra xem list có phải là palindrome không
+        return values == values[::-1]
+
     # Phương thức display: In ra các phần tử trong danh sách
     def display(self):
         current_node = self.head
@@ -197,78 +311,166 @@ class SinglyLinkedList:
         print("None")
 
 
+# # Sử dụng danh sách liên kết
+# llist = SinglyLinkedList()
+
+# # Thêm các phần tử vào danh sách
+# llist.append("B")
+# llist.append("C")
+# llist.append("E")
+# # Sử dụng prepend để thêm A vào đầu danh sách
+# llist.prepend("A")
+# # Chèn phần tử "D" sau node có giá trị "C"
+# llist.insert_after_node("C", "D")
+
+# # Hiển thị danh sách ban đầu
+# print("------------------------------\nDanh sách ban đầu:")
+# llist.display()
+
+# # Xóa node tại vị trí 0 (head)
+# llist.delete_at_position(0)
+
+# # Hiển thị danh sách sau khi xóa node tại vị trí 0
+# print("\nDanh sách sau khi xóa vị trí 0 (head):")
+# llist.display()
+
+# # Xóa node tại vị trí 2
+# llist.delete_at_position(2)
+
+# # Hiển thị danh sách sau khi xóa node tại vị trí 2
+# print("\nDanh sách sau khi xóa vị trí 2:")
+# llist.display()
+
+# # Xóa node "C" (không phải head)
+# llist.delete_node("C")
+
+# # Hiển thị danh sách sau khi xóa
+# print("\nDanh sách sau khi xóa C:")
+# llist.display()
+
+# # Xóa node "B" (là head)
+# llist.delete_node("B")
+
+# # Hiển thị danh sách sau khi xóa
+# print("\nDanh sách sau khi xóa B (head):")
+# llist.display()
+
+# llist.insert_at_position(0, "A")
+# llist.insert_at_position(1, "B")
+# llist.insert_at_position(2, "C")
+# llist.insert_at_position(3, "D")
+
+# # Hiển thị danh sách sau khi chèn A, B, C, D
+
+# print("\nDanh sách sau khi chèn A, B, C, D:")
+# llist.display()
+
+# # Tính độ dài bằng phương pháp lặp
+# length_iterative = llist.get_length_iterative()
+# print(f"\nĐộ dài (lặp): {length_iterative}")
+
+# # Xóa node "E" (không phải head)
+# llist.delete_node("E")
+
+# # Hiển thị danh sách sau khi xóa
+# print("\nDanh sách sau khi xóa E:")
+# llist.display()
+
+# # Tính độ dài bằng phương pháp đệ quy
+# length_recursive = llist.get_length_recursive(llist.head)
+# print(f"\nĐộ dài (đệ quy) sau khi xóa E: {length_recursive}")
+
+# # Hoán đổi hai node
+# llist.swap_nodes("A", "D")
+
+# # Hiển thị danh sách sau khi hoán đổi
+# print("\nDanh sách sau khi hoán đổi A và D:")
+# llist.display()
+
+# llist.display()
+# llist.reverse_iterative()
+
+# # Sử dụng danh sách liên kết
+# llist1 = SinglyLinkedList()
+# llist2 = SinglyLinkedList()
+
+# # Thêm các phần tử vào danh sách liên kết 1 (đã sắp xếp)
+# llist1.append(1)
+# llist1.append(3)
+# llist1.append(5)
+
+# # Thêm các phần tử vào danh sách liên kết 2 (đã sắp xếp)
+# llist2.append(2)
+# llist2.append(4)
+# llist2.append(6)
+
+# print("Danh sách liên kết 1:")
+# llist1.display()
+
+# print("Danh sách liên kết 2:")
+# llist2.display()
+
+# # Gộp hai danh sách liên kết đã sắp xếp
+# llist1.merge_sorted_lists(llist2)
+
+# print("\nDanh sách liên kết sau khi gộp:")
+# llist1.display()
+# Sử dụng danh sách liên kết
+# llist = SinglyLinkedList()
+
+# # Thêm các phần tử vào danh sách
+# llist.append(1)
+# llist.append(2)
+# llist.append(2)
+# llist.append(3)
+# llist.append(4)
+# llist.append(4)
+# llist.append(5)
+
+# print("Danh sách ban đầu:")
+# llist.display()
+
+# # Xóa các phần tử trùng lặp
+# llist.remove_duplicates()
+
+# print("Danh sách sau khi xóa các phần tử trùng lặp:")
+# llist.display()
+
+# # Sử dụng danh sách liên kết
+# llist = SinglyLinkedList()
+
+# # Thêm các phần tử vào danh sách
+# llist.append(1)
+# llist.append(2)
+# llist.append(3)
+# llist.append(4)
+# llist.append(5)
+
+# print("Danh sách liên kết:")
+# llist.display()
+
+# # Tìm node thứ N từ cuối
+# N = 4
+# result_node = llist.nth_to_last_node(N)
+# if result_node:
+#     print(f"Node thứ {N} từ cuối danh sách có giá trị: {result_node.data}")
+# else:
+#     print(f"Node thứ {N} từ cuối không tồn tại.")
 # Sử dụng danh sách liên kết
 llist = SinglyLinkedList()
 
 # Thêm các phần tử vào danh sách
-llist.append("B")
-llist.append("C")
-llist.append("E")
-# Sử dụng prepend để thêm A vào đầu danh sách
-llist.prepend("A")
-# Chèn phần tử "D" sau node có giá trị "C"
-llist.insert_after_node("C", "D")
+llist.append(1)
+llist.append(2)
+llist.append(3)
+llist.append(2)
+llist.append(1)
 
-# Hiển thị danh sách ban đầu
-print("------------------------------\nDanh sách ban đầu:")
+print("Danh sách liên kết:")
 llist.display()
 
-# Xóa node tại vị trí 0 (head)
-llist.delete_at_position(0)
-
-# Hiển thị danh sách sau khi xóa node tại vị trí 0
-print("\nDanh sách sau khi xóa vị trí 0 (head):")
-llist.display()
-
-# Xóa node tại vị trí 2
-llist.delete_at_position(2)
-
-# Hiển thị danh sách sau khi xóa node tại vị trí 2
-print("\nDanh sách sau khi xóa vị trí 2:")
-llist.display()
-
-# Xóa node "C" (không phải head)
-llist.delete_node("C")
-
-# Hiển thị danh sách sau khi xóa
-print("\nDanh sách sau khi xóa C:")
-llist.display()
-
-# Xóa node "B" (là head)
-llist.delete_node("B")
-
-# Hiển thị danh sách sau khi xóa
-print("\nDanh sách sau khi xóa B (head):")
-llist.display()
-
-llist.insert_at_position(0, "A")
-llist.insert_at_position(1, "B")
-llist.insert_at_position(2, "C")
-llist.insert_at_position(3, "D")
-
-# Hiển thị danh sách sau khi chèn A, B, C, D
-
-print("\nDanh sách sau khi chèn A, B, C, D:")
-llist.display()
-
-# Tính độ dài bằng phương pháp lặp
-length_iterative = llist.get_length_iterative()
-print(f"\nĐộ dài (lặp): {length_iterative}")
-
-# Xóa node "E" (không phải head)
-llist.delete_node("E")
-
-# Hiển thị danh sách sau khi xóa
-print("\nDanh sách sau khi xóa E:")
-llist.display()
-
-# Tính độ dài bằng phương pháp đệ quy
-length_recursive = llist.get_length_recursive(llist.head)
-print(f"\nĐộ dài (đệ quy) sau khi xóa E: {length_recursive}")
-
-# Hoán đổi hai node
-llist.swap_nodes("A", "D")
-
-# Hiển thị danh sách sau khi hoán đổi
-print("\nDanh sách sau khi hoán đổi A và D:")
-llist.display()
+# Kiểm tra xem danh sách có phải là palindrome không
+if llist.is_palindrome():
+    print("Danh sách là palindrome")
+else:
+    print("Danh sách không phải là palindrome")
