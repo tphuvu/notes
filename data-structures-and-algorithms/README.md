@@ -1978,3 +1978,221 @@ Hàm `count_occurrences` sẽ duyệt qua từng node của danh sách, kiểm t
 ## Tóm tắt
 
 Các phương thức trên giúp thực hiện các thao tác phổ biến và quan trọng với Singly Linked List, từ việc thêm, xóa, đến kiểm tra và merge. Với các phương thức này, ta có thể dễ dàng quản lý và thao tác với linked list một cách hiệu quả.
+
+# Circular Linked Lists
+
+## Giới thiệu
+
+Circular Linked List cũng gần giống một Singly Linked List, khác ở chỗ:
+
+- Node cuối cùng (tail node) trỏ trở lại node đầu (head node) thay vì null (`None`).
+- Không có điểm kết thúc rõ ràng. Khi duyệt qua danh sách, bạn sẽ lặp lại vô hạn nếu không kiểm tra điều kiện cụ thể.
+
+Circular linked list hữu ích trong các bài toán yêu cầu vòng lặp vô tận hoặc cần quay lại điểm đầu tiên sau khi kết thúc một chu kỳ, như lặp lại danh sách nhạc.
+
+![](images/cll.png)
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+```
+
+## Append
+
+Phương thức `append` thêm một node mới vào cuối danh sách. Nếu danh sách rỗng, node mới sẽ trở thành node đầu (head) và `next` của nó sẽ trỏ về chính nó, tạo thành một vòng tròn. Nếu danh sách không rỗng, phương thức sẽ duyệt đến node cuối cùng và thêm node mới vào sau đó, đảm bảo cấu trúc vòng tròn bằng cách trỏ `next` của node cuối (vừa thêm) đến `head`.
+
+```python
+def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            new_node.next = self.head
+        else:
+            current = self.head
+            while current.next != self.head:
+                current = current.next
+            current.next = new_node
+            new_node.next = self.head
+```
+
+## Print List
+
+Phương thức `print_list` duyệt qua danh sách liên kết vòng, bắt đầu từ head. Nó in ra dữ liệu của từng node cho đến khi quay lại head, báo hiệu rằng đã hoàn thành một vòng. Phương thức này cho phép hiển thị các phần tử trong danh sách và thấy được tính liên kết vòng của chúng.
+
+```python
+def print_list(self):
+        current = self.head
+        if self.head:
+            while True:
+                print(current.data, end=" -> ")
+                current = current.next
+                if current == self.head:
+                    break
+            print("(head)")
+        else:
+            print("List is empty.")
+```
+
+## Prepend
+
+Phương thức `prepend` thêm một node mới vào đầu danh sách. Nó đặt node mới trước node đầu hiện tại và cập nhật con trỏ `next` của node cuối cùng để trỏ về node mới, đảm bảo cấu trúc vòng tròn. Node mới sẽ trở thành `head`.
+
+```python
+def prepend(self, data):
+        new_node = Node(data)
+        current = self.head
+        new_node.next = self.head
+
+        if not self.head:
+            new_node.next = new_node
+        else:
+            while current.next != self.head:
+                current = current.next
+            current.next = new_node
+        self.head = new_node
+```
+
+## Remove
+
+Phương thức `remove` trong Circular Linked List được sử dụng để xóa một node có giá trị xác định ra khỏi danh sách. Khi thực hiện thao tác này, cần đảm bảo rằng cấu trúc vòng của danh sách vẫn được duy trì.
+
+- Trường hợp xóa head node: Nếu head node cần xóa, con trỏ của tail node phải được cập nhật để trỏ đến node tiếp theo sau head node.
+- Trường hợp xóa node giữa hoặc cuối: Ta sẽ duyệt từ node đầu cho đến khi tìm được node cần xóa, sau đó cập nhật con trỏ `next` của node trước đó để bỏ qua node cần xóa và trỏ đến node tiếp theo.
+
+Cần chú ý các trường hợp đặc biệt như danh sách chỉ có một node hoặc danh sách rỗng.
+
+```python
+def remove(self, key):
+        if self.head:
+            # Node cần xóa là head node
+            if self.head.data == key:
+                current = self.head
+                # Di chuyển đến node cuối
+                while current.next != self.head:
+                    current = current.next
+                # Nếu danh sách chỉ có một node
+                if self.head == self.head.next:
+                    self.head = None
+                else:
+                    current.next = self.head.next
+                    self.head = self.head.next
+            else:
+                current = self.head
+                prev = None
+                # Duyệt qua danh sách để tìm node cần xóa
+                while current.next != self.head:
+                    prev = current
+                    current = current.next
+                    if current.data == key:
+                        prev.next = current.next
+                        break
+```
+
+## Chia Circular Linked List thành hai nửa
+
+Ta giải quyết như sau:
+
+1. Tìm độ dài
+2. Tính toán điểm giữa vì đây là nơi ta sẽ chia danh sách thành hai phần.
+3. Duyệt qua danh sách cho đến khi bạn đến điểm giữa.
+
+- Ngắt liên kết vòng tại điểm giữa bằng cách điều chỉnh con trỏ next của node trước điểm giữa.
+- Tạo một danh sách liên kết vòng mới với các node còn lại từ điểm giữa đến cuối danh sách.
+  ![](images/cll_split.png)
+
+```python
+    def length(self):
+        if not self.head:
+            return 0
+        temp = self.head
+        count = 1
+        while temp.next != self.head:
+            count += 1
+            temp = temp.next
+        return count
+
+    # Phương thức chia Circular Linked List thành hai nửa
+    def split(self):
+        if not self.head:
+            return None, None
+
+        length = self.length()
+        if length == 1:
+            return self, None  # Chỉ có một node, không thể chia
+
+        mid = length // 2
+        current = self.head
+        prev = None
+
+        # Traverse till the midpoint/ Duyệt đến điểm giữa
+        for _ in range(mid):
+            prev = current
+            current = current.next
+
+        # Tạo circular linked list thứ hai
+        second_list = CircularLinkedList()
+        second_list.head = current
+
+        # Ngắt danh sách đầu tiên
+        prev.next = self.head  # Làm cho danh sách đầu tiên thành circular
+
+        # Duyệt qua danh sách thứ hai để làm nó thành circular
+        temp = second_list.head
+        while temp.next != self.head:
+            temp = temp.next
+        temp.next = second_list.head
+
+        return self, second_list
+```
+
+### Sử dụng
+
+```python
+# Ví dụ sử dụng
+cll = CircularLinkedList()
+for i in range(1, 11):
+    cll.append(i)
+
+print("Danh sách liên kết vòng ban đầu:")
+cll.print_list()
+
+list1, list2 = cll.split()
+
+print("\nDanh sách liên kết vòng thứ nhất:")
+list1.print_list()
+
+print("\nDanh sách liên kết vòng thứ hai:")
+list2.print_list()
+```
+
+```terminal
+Danh sách liên kết vòng ban đầu:
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> (head)
+
+Danh sách liên kết vòng thứ nhất:
+1 -> 2 -> 3 -> 4 -> 5 -> (head)
+
+Danh sách liên kết vòng thứ hai:
+6 -> 7 -> 8 -> 9 -> 10 -> (head)
+```
+
+<!--
+# Doubly Linked Lists
+
+# Arrays
+
+# Binary Trees
+
+# Binary Search Trees
+
+# Binary Search
+
+# Recursion
+
+# String Processing -->
