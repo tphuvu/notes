@@ -5,36 +5,8 @@
   - [Dictionary](#dictionary)
   - [Set](#set)
 - [Stack](#stack)
-  - [Các thao tác cơ bản trên stack](#các-thao-tác-cơ-bản-trên-stack)
-  - [Determine if Brackets are Balanced](#determine-if-brackets-are-balanced)
-  - [Reverse String](#reverse-string)
-  - [Convert Decimal Integer to Binary](#convert-decimal-integer-to-binary)
 - [Singly Linked List](#singly-linked-list)
-  - [Giới thiệu](#giới-thiệu)
-    - [display()](#display)
-  - [Insertion](#insertion)
-    - [Append](#append)
-    - [Prepend](#prepend)
-    - [Insert After Node](#insert-after-node)
-    - [Insert a node at a specific position in a linked list](#insert-a-node-at-a-specific-position-in-a-linked-list)
-  - [Deletion](#deletion)
-    - [Xóa bởi giá trị](#xóa-bởi-giá-trị)
-    - [Xóa bởi vị trí](#xóa-bởi-vị-trí)
-  - [Length](#length)
-    - [Iterative](#iterative)
-    - [Recursive](#recursive)
-  - [Node Swap](#node-swap)
-    - [Giải thích](#giải-thích)
-    - [Minh họa](#minh-họa)
-  - [Reverse](#reverse)
-    - [Iterative](#iterative-1)
-  - [Merge Two Sorted Linked Lists](#merge-two-sorted-linked-lists)
-  - [Remove Duplicates](#remove-duplicates)
-  - [Nth-to-Last Node](#nth-to-last-node)
-  - [Count Occurrences](#count-occurrences)
-  - [Is Palindrome](#is-palindrome)
-    - [Sử dụng List](#sử-dụng-list)
-  - [Tóm tắt](#tóm-tắt-1)
+- [Circular Linked List](#circular-linked-list)
 
 # Data Structures và Algorithms trong Python
 
@@ -1979,7 +1951,7 @@ Hàm `count_occurrences` sẽ duyệt qua từng node của danh sách, kiểm t
 
 Các phương thức trên giúp thực hiện các thao tác phổ biến và quan trọng với Singly Linked List, từ việc thêm, xóa, đến kiểm tra và merge. Với các phương thức này, ta có thể dễ dàng quản lý và thao tác với linked list một cách hiệu quả.
 
-# Circular Linked Lists
+# Circular Linked List
 
 ## Giới thiệu
 
