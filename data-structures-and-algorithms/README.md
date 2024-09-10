@@ -1995,7 +1995,7 @@ def append(self, data):
 
 ## Print List
 
-Phương thức `print_list` duyệt qua danh sách liên kết vòng, bắt đầu từ head. Nó in ra dữ liệu của từng node cho đến khi quay lại head, báo hiệu rằng đã hoàn thành một vòng. Phương thức này cho phép hiển thị các phần tử trong danh sách và thấy được tính liên kết vòng của chúng.
+Phương thức `print_list` duyệt qua danh sách liên kết vòng, bắt đầu từ head. Nó in ra dữ liệu của từng node cho đến khi quay lại head (đã duyệt được một vòng)
 
 ```python
 def print_list(self):
@@ -2154,8 +2154,233 @@ Danh sách liên kết vòng thứ hai:
 6 -> 7 -> 8 -> 9 -> 10 -> (head)
 ```
 
-<!--
 # Doubly Linked Lists
+
+Danh sách liên kết đôi (Doubly Linked List) giống với danh sách liên kết đơn (Singly Linked List), nhưng có thêm sự khác biệt là con trỏ `prev` trong mỗi node.
+
+Cấu trúc của Node trong danh sách liên kết đôi:
+
+- Data: Chứa dữ liệu của node.
+- Next: Con trỏ trỏ đến node tiếp theo trong danh sách.
+- Prev: Con trỏ trỏ đến node trước đó trong danh sách.
+
+Trong khi danh sách liên kết đơn chỉ có con trỏ `next` để liên kết với node kế tiếp, danh sách liên kết đôi có thêm con trỏ `prev` để liên kết với node trước đó, giúp cho việc duyệt ngược qua danh sách trở nên dễ dàng hơn.
+
+![](images/dll.png)
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+```
+
+## Append và Prepend
+
+### Append
+
+```python
+def append(self, data):
+        new_node = Node(data)
+        if not self.head:  # Nếu danh sách rỗng
+            self.head = new_node
+            return
+        temp = self.head
+        while temp.next:
+            temp = temp.next
+        temp.next = new_node
+        new_node.prev = temp
+```
+
+- Tạo một node mới.
+- Nếu danh sách rỗng (head node bằng `None`), thì node mới trở thành node đầu tiên (head).
+- Nếu danh sách không rỗng, duyệt qua danh sách để tìm node cuối cùng, rồi liên kết con trỏ `next` của node cuối cùng với node mới. Con trỏ `prev` của node mới trỏ ngược lại node cuối cùng.
+
+### Prepend
+
+```python
+    def prepend(self, data):
+        new_node = Node(data)
+        if not self.head:  # Nếu danh sách rỗng
+            self.head = new_node
+            return
+        self.head.prev = new_node
+        new_node.next = self.head
+        self.head = new_node
+```
+
+- Tạo một node mới.
+- Nếu danh sách rỗng (tức là head node bằng `None`), thì node mới này trở thành node đầu tiên.
+- Nếu danh sách không rỗng, con trỏ `next` của node mới sẽ trỏ đến node đầu hiện tại, và con trỏ `prev` của node đầu hiện tại sẽ trỏ ngược về node mới.
+- Cập nhật head node thành node mới.
+
+## Add Node Before/After
+
+### Before
+
+```python
+# Thêm node trước một node cụ thể
+    def add_before(self, target_data, data):
+        temp = self.head
+        while temp:
+            if temp.data == target_data:
+                new_node = Node(data)
+                new_node.next = temp
+                new_node.prev = temp.prev
+                if temp.prev:
+                    temp.prev.next = new_node
+                else:
+                    self.head = new_node
+                temp.prev = new_node
+                return
+            temp = temp.next
+        print(f"Node {target_data} không tồn tại trong danh sách")
+```
+
+- Xác định vị trí của node mà bạn muốn thêm node mới trước nó (node mục tiêu).
+- Tạo một node mới chứa dữ liệu.
+- Điều chỉnh các con trỏ để thêm node mới vào trước node mục tiêu:
+  - Con trỏ `next` của node mới sẽ trỏ đến node mục tiêu.
+  - Con trỏ `prev` của node mới sẽ trỏ đến node trước node mục tiêu (nếu có).
+  - Nếu node mục tiêu không phải là node đầu tiên, bạn cũng phải điều chỉnh con trỏ `next` của node trước đó để trỏ đến node mới.
+  - Nếu node mục tiêu là node đầu tiên (head), cập nhật head thành node mới.
+
+### After
+
+```python
+# Thêm node sau một node cụ thể
+    def add_after(self, target_data, data):
+        temp = self.head
+        while temp:
+            if temp.data == target_data:
+                new_node = Node(data)
+                # cập nhật con trỏ next của node mới để trỏ đến node sau node mục tiêu
+                new_node.next = temp.next
+                # cập nhật con trỏ prev của node sau node mục tiêu để trỏ về node mới
+                if temp.next:
+                    temp.next.prev = new_node
+                # cập nhật con trỏ next của node mục trỏ đến node mới
+                temp.next = new_node
+                # cập nhật con trỏ prev của node mới để trỏ về node mục tiêu
+                new_node.prev = temp
+                return
+            temp = temp.next
+        print(f"Node {target_data} không tồn tại trong danh sách")
+```
+
+- Xác định vị trí của node mà bạn muốn thêm node mới sau nó (node mục tiêu).
+- Tạo một node mới chứa dữ liệu.
+- Điều chỉnh các con trỏ để thêm node mới vào sau node mục tiêu:
+  - Con trỏ `prev` của node mới sẽ trỏ về node mục tiêu.
+  - Con trỏ `next` của node mới sẽ trỏ đến node sau node mục tiêu (nếu có).
+  - Nếu node mục tiêu không phải là node cuối cùng, bạn cũng phải điều chỉnh con trỏ `prev` của node sau node mục tiêu để trỏ về node mới.
+  - Nếu node mục tiêu là node cuối cùng, node mới sẽ trở thành node cuối cùng trong danh sách.
+
+## Delete Node
+
+```python
+    # Xóa node
+    def delete(self, target_data):
+        temp = self.head
+
+        # Trường hợp danh sách rỗng
+        if not temp:
+            print("Danh sách rỗng")
+            return
+
+        # Trường hợp chỉ có một node
+        if temp.next is None and temp.data == target_data:
+            self.head = None
+            return
+
+        # Trường hợp xóa node đầu
+        if temp.data == target_data:
+            self.head = temp.next
+            self.head.prev = None
+            return
+
+        # Trường hợp xóa node ở giữa hoặc cuối
+        while temp:
+            if temp.data == target_data:
+                if temp.next:  # Node ở giữa
+                    temp.prev.next = temp.next
+                    temp.next.prev = temp.prev
+                else:  # Node ở cuối
+                    temp.prev.next = None
+                return
+            temp = temp.next
+
+        print(f"Node {target_data} không tồn tại trong danh sách")
+```
+
+- Nếu danh sách chỉ có một node (tức là head.next là `None`), việc xóa node đó sẽ làm cho danh sách trở thành rỗng (head bằng `None`).
+- Nếu node cần xóa là node đầu tiên (head):
+  - Cập nhật `head` để trỏ đến node tiếp theo.
+  - Đặt con trỏ `prev` của node tiếp theo là `None` (nếu có node tiếp theo).
+- Nếu node cần xóa nằm ở giữa:
+  - Con trỏ `next` của node trước node cần xóa sẽ trỏ đến node tiếp theo của node cần xóa.
+  - Con trỏ `prev` của node tiếp theo sẽ trỏ ngược lại node trước đó.
+- Nếu node cần xóa là node cuối cùng:
+  - Cập nhật con trỏ `next` của node trước đó về `None`, bỏ qua node cuối cùng.
+
+## Reverse
+
+```python
+ # Đảo ngược danh sách liên kết đôi
+    def reverse(self):
+        temp = self.head
+        if not temp:
+            return
+
+        while temp:
+            temp.prev, temp.next = temp.next, temp.prev  # Đảo ngược con trỏ prev và next
+            if not temp.prev:  # Sau khi đảo ngược, temp.prev sẽ là None khi ở node cuối
+                self.head = temp  # Cập nhật lại head
+            temp = temp.prev  # Tiếp tục đảo ngược đến node tiếp theo
+```
+
+- Bắt đầu từ node đầu (head), ta sẽ duyệt qua từng node trong danh sách.
+- Hoán đổi các con trỏ:
+  - Với mỗi node, hoán đổi giá trị của hai con trỏ `prev` và `next`.
+  - Sau khi hoán đổi, con trỏ `prev` sẽ trỏ đến node tiếp theo, và con trỏ `next` sẽ trỏ đến node trước đó.
+- Cập nhật head node: Sau khi hoàn tất việc hoán đổi, node cuối cùng trước đó sẽ trở thành node đầu tiên. Vì vậy, cần cập nhật lại head của danh sách.
+
+## Ưu và nhược điểm của Singly Linked List, Circular Linked List, Doubly Linked List
+
+### Singly Linked List
+
+- Ưu điểm:
+  - Cấu trúc đơn giản, tiêu tốn ít bộ nhớ hơn vì chỉ cần một con trỏ next.
+- Nhược điểm:
+  - Không thể duyệt ngược từ cuối danh sách.
+  - Việc chèn, xóa node ở giữa mất thời gian vì cần duyệt từ đầu danh sách.
+
+### Circular Linked List
+
+Có thể là dạng liên kết đơn hoặc đôi, nhưng phổ biến là liên kết đơn.
+
+- Ưu điểm:
+  - Có thể duyệt vòng vô tận từ bất kỳ vị trí nào trong danh sách.
+  - Thích hợp cho các trường hợp yêu cầu hoạt động tuần hoàn, như lặp danh sách nhạc hoặc vòng lặp chơi game.
+- Nhược điểm:
+  - Khó xác định điểm kết thúc danh sách vì không có `None` để chỉ định kết thúc.
+  - Việc xóa node hoặc duyệt vẫn tương tự như danh sách liên kết đơn, không thể duyệt ngược nếu là liên kết đơn.
+
+### Doubly Linked List
+
+- Ưu điểm:
+  - Duyệt ngược dễ dàng từ bất kỳ vị trí nào trong danh sách.
+  - Chèn và xóa node nhanh chóng ở cả đầu, cuối, hoặc giữa danh sách vì có thể truy cập trực tiếp cả hai chiều.
+- Nhược điểm:
+  - Tiêu tốn nhiều bộ nhớ hơn vì mỗi node có thêm con trỏ `prev`.
+  - Quản lý phức tạp hơn do phải duy trì và cập nhật cả hai con trỏ `next` và `prev`.
+
+<!--
 
 # Arrays
 
@@ -2168,3 +2393,7 @@ Danh sách liên kết vòng thứ hai:
 # Recursion
 
 # String Processing -->
+
+```
+
+```
