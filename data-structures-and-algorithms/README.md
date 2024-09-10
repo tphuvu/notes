@@ -2350,6 +2350,70 @@ def append(self, data):
   - Sau khi hoán đổi, con trỏ `prev` sẽ trỏ đến node tiếp theo, và con trỏ `next` sẽ trỏ đến node trước đó.
 - Cập nhật head node: Sau khi hoàn tất việc hoán đổi, node cuối cùng trước đó sẽ trở thành node đầu tiên. Vì vậy, cần cập nhật lại head của danh sách.
 
+## Sử dụng
+
+```python
+# Ví dụ sử dụng
+dll = DoublyLinkedList()
+
+# Thêm một số phần tử vào danh sách
+dll.append(10)
+dll.append(20)
+dll.append(30)
+dll.prepend(0)
+
+# In danh sách
+print("Danh sách liên kết đôi ban đầu:")
+dll.print_list()
+
+# Thêm node sau node có giá trị 20
+dll.add_after(20, 25)
+print("\nSau khi thêm 25 sau 20:")
+dll.print_list()
+
+# Thêm node trước node có giá trị 10
+dll.add_before(10, 5)
+print("\nSau khi thêm 5 trước 10:")
+dll.print_list()
+
+# Xóa node đầu tiên
+dll.delete(0)
+print("\nSau khi xóa node đầu (0):")
+dll.print_list()
+
+# Xóa node cuối cùng
+dll.delete(30)
+print("\nSau khi xóa node cuối (30):")
+dll.print_list()
+
+# Đảo ngược danh sách
+dll.reverse()
+print("\nSau khi đảo ngược danh sách:")
+dll.print_list()
+
+```
+
+```Terminal
+Danh sách liên kết đôi ban đầu:
+
+0 <-> 10 <-> 20 <-> 30
+
+Sau khi thêm 25 sau 20:
+0 <-> 10 <-> 20 <-> 25 <-> 30
+
+Sau khi thêm 5 trước 10:
+0 <-> 5 <-> 10 <-> 20 <-> 25 <-> 30
+
+Sau khi xóa node đầu (0):
+5 <-> 10 <-> 20 <-> 25 <-> 30
+
+Sau khi xóa node cuối (30):
+5 <-> 10 <-> 20 <-> 25
+
+Sau khi đảo ngược danh sách:
+25 <-> 20 <-> 10 <-> 5
+```
+
 ## Ưu và nhược điểm của Singly Linked List, Circular Linked List, Doubly Linked List
 
 ### Singly Linked List
