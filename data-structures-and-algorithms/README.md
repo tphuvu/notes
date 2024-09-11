@@ -7,6 +7,7 @@
 - [Stack](#stack)
 - [Singly Linked List](#singly-linked-list)
 - [Circular Linked List](#circular-linked-list)
+- [Doubly Linked List](#doubly-linked-list)
 
 # Data Structures và Algorithms trong Python
 
@@ -2154,7 +2155,7 @@ Danh sách liên kết vòng thứ hai:
 6 -> 7 -> 8 -> 9 -> 10 -> (head)
 ```
 
-# Doubly Linked Lists
+# Doubly Linked List
 
 Danh sách liên kết đôi (Doubly Linked List) giống với danh sách liên kết đơn (Singly Linked List), nhưng có thêm sự khác biệt là con trỏ `prev` trong mỗi node.
 
@@ -2443,21 +2444,3 @@ Có thể là dạng liên kết đơn hoặc đôi, nhưng phổ biến là li�
 - Nhược điểm:
   - Tiêu tốn nhiều bộ nhớ hơn vì mỗi node có thêm con trỏ `prev`.
   - Quản lý phức tạp hơn do phải duy trì và cập nhật cả hai con trỏ `next` và `prev`.
-
-<!--
-
-# Arrays
-
-# Binary Trees
-
-# Binary Search Trees
-
-# Binary Search
-
-# Recursion
-
-# String Processing -->
-
-```
-
-```
